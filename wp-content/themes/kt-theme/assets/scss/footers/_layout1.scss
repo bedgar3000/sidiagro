@@ -1,0 +1,126 @@
+.footer-1 {
+    padding: 125px 0;
+    background-color: $color-primary;
+    color: #fff;
+    font-size: 14px;
+    font-weight: $font-weight-light;
+    text-align: center;
+
+    h3 {
+        color: #fff;
+        font-size: 21px;
+        font-weight: $font-weight-light;
+        line-height: 1;
+        margin: 0 0 15px;
+    }
+
+    a {
+        color: #fff !important;
+
+        &:hover {
+            color: #fff;
+            opacity: 0.7;
+        }
+    }
+
+    .footer-escudos {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 30px;
+
+        img {
+            margin: 0 30px;
+        }
+    }
+
+    .footer-phone {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        .sep {
+            margin: 0 8px;
+        }
+    }
+
+    .footer-menu {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        .menu-item {
+            color: #fff !important;
+
+            &::after {
+                content: "|";
+                color: #fff !important;
+                margin: 0 10px;
+            }
+
+            &:last-child {
+                &::after {
+                    content: unset;
+                }
+            }
+        }
+    }
+
+    .container {
+        position: relative;
+    }
+
+    .logos-footer {
+        position: absolute;
+        top: 0;
+        right: 15px;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+
+        span {
+            margin: 0 5px;
+        }
+    }
+}
+
+.line-vertical-white {
+    display: inline-block;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    width: 1px;
+    height: 77px;
+    background-image: url(../img/misc/line-vertical-white.png);
+}
+
+@media(max-width: 1199px) {
+    .footer-1 .logos-footer {
+        position: unset;
+        justify-content: center;
+        margin-top: 30px;
+    }
+}
+
+@media(max-width: 575px) {
+    .footer-1 {
+        padding: 75px 0;
+    }
+    .footer-1 .footer-menu .menu-item::after {
+        display: none;
+    }
+    .footer-1 .footer-menu {
+        flex-direction: column;
+    }
+
+    .footer-1 .footer-phone {
+        flex-direction: column;
+
+        .sep {
+            display: none;
+        }
+    }
+}

@@ -1,0 +1,216 @@
+.icon {
+    display: inline-block;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    
+    &.icon-search-white {
+        background-image: url(../img/icons/icon-search-white.svg);
+        width: 16px;
+        height: 16px;
+    }
+    
+    &.icon-login-white {
+        background-image: url(../img/icons/icon-login-white.svg);
+        width: 20px;
+        height: 18px;
+    }
+    
+    &.icon-btn-go {
+        background-image: url(../img/icons/icon-btn-go.svg);
+        width: 21px;
+        height: 11px;
+    }
+    
+    &.icon-btn-go-primary-sm {
+        background-image: url(../img/icons/icon-btn-go-primary-sm.svg);
+        width: 5px;
+        height: 8px;
+    }
+    
+    &.icon-btn-go-white {
+        background-image: url(../img/icons/icon-btn-go-white.svg);
+        width: 17px;
+        height: 12px;
+    }
+    
+    &.icon-contact-phone-white {
+        background-image: url(../img/icons/icon-contact-phone-white.svg);
+        width: 18px;
+        height: 25px;
+    }
+    
+    &.icon-contact-email-white {
+        background-image: url(../img/icons/icon-contact-email-white.svg);
+        width: 24px;
+        height: 17px;
+    }
+    
+    &.icon-contact-address-white {
+        background-image: url(../img/icons/icon-contact-address-white.svg);
+        width: 18px;
+        height: 27px;
+    }
+    
+    &.icon-camera-white {
+        background-image: url(../img/icons/icon-camera-white.svg);
+        width: 19px;
+        height: 15px;
+    }
+    
+    &.icon-pdf-white {
+        background-image: url(../img/icons/icon-pdf-white.png);
+        width: 27px;
+        height: 34px;
+    }
+    
+    &.icon-xls-white {
+        background-image: url(../img/icons/icon-xls-white.png);
+        width: 27px;
+        height: 34px;
+    }
+    
+    &.icon-btn-go-white {
+        background-image: url(../img/icons/icon-btn-go-white.svg);
+        width: 14px;
+        height: 11px;
+    }
+    
+    &.icon-btn-go-alt-primary {
+        background-image: url(../img/icons/icon-btn-go-alt-primary.svg);
+        width: 5px;
+        height: 8px;
+    }
+    
+    &.icon-menu-caret-white {
+        background-image: url(../img/icons/icon-menu-caret-white.svg);
+        width: 12px;
+        height: 7px;
+    }
+    
+    &.icon-caret-down-primary {
+        background-image: url(../img/icons/icon-caret-down-primary.svg);
+        width: 14px;
+        height: 8px;
+    }
+    
+    &.icon-caret-up-primary {
+        background-image: url(../img/icons/icon-caret-up-primary.svg);
+        width: 14px;
+        height: 8px;
+    }
+    
+    &.icon-btn-send-white {
+        background-image: url(../img/icons/icon-btn-send-white.svg);
+        width: 20px;
+        height: 20px;
+    }
+    
+    &.icon-pagination-next {
+        background-image: url(../img/icons/icon-pagination-next.svg);
+        width: 7px;
+        height: 12px;
+    }
+    
+    &.icon-pagination-prev {
+        background-image: url(../img/icons/icon-pagination-prev.svg);
+        width: 7px;
+        height: 12px;
+    }
+    
+    &.icon-network-facebook {
+        background-image: url(../img/icons/icon-network-facebook.svg);
+        width: 48px;
+        height: 48px;
+    }
+    
+    &.icon-network-instagram {
+        background-image: url(../img/icons/icon-network-instagram.svg);
+        width: 48px;
+        height: 48px;
+    }
+    
+    &.icon-network-youtube {
+        background-image: url(../img/icons/icon-network-youtube.svg);
+        width: 48px;
+        height: 48px;
+    }
+    
+    &.icon-social-tripadvisor {
+        background-image: url(../img/icons/icon-social-tripadvisor.svg);
+        width: 26px;
+        height: 16px;
+    }
+    
+    &.icon-social-tripadvisor-white {
+        background-image: url(../img/icons/icon-social-tripadvisor-white.svg);
+        width: 26px;
+        height: 16px;
+    }
+    
+    &.icon-widget-instagram {
+        background-image: url(../img/icons/icon-widget-instagram.svg);
+        width: 50px;
+        height: 50px;
+    }
+    
+    &.icon-widget-twitter {
+        background-image: url(../img/icons/icon-widget-twitter.svg);
+        width: 50px;
+        height: 50px;
+    }
+    
+    &.icon-contact-info-location {
+        background-image: url(../img/icons/icon-contact-info-location.svg);
+        width: 14px;
+        height: 19px;
+    }
+    
+    &.icon-contact-info-phone {
+        background-image: url(../img/icons/icon-contact-info-phone.svg);
+        width: 12px;
+        height: 17px;
+    }
+    
+    &.icon-contact-info-email {
+        background-image: url(../img/icons/icon-contact-info-email.svg);
+        width: 31px;
+        height: 22px;
+    }
+    
+    &.icon-custom-calendar {
+        background-image: url(../img/icons/icon-custom-calendar.svg);
+        width: 31px;
+        height: 31px;
+    }
+    
+    &.icon-owl-open {
+        background-image: url(../img/icons/icon-owl-open.svg);
+        width: 31px;
+        height: 31px;
+    }
+    
+    &.icon-card-open {
+        background-image: url(../img/icons/icon-card-open.svg);
+        width: 31px;
+        height: 31px;
+    }
+    
+    &.icon-play-solid-primary {
+        background-image: url(../img/icons/icon-play-solid-primary.svg);
+        width: 53px;
+        height: 37px;
+    }
+    
+    &.icon-flag-en {
+        background-image: url(../img/icons/icon-flag-en.png);
+        width: 16px;
+        height: 16px;
+    }
+    
+    &.icon-flag-es {
+        background-image: url(../img/icons/icon-flag-es.png);
+        width: 16px;
+        height: 16px;
+    }
+}

@@ -1,0 +1,14 @@
+.owl-carousel {
+    &.owl-theme {
+        .owl-dots {
+            .owl-dot {
+                &.active,
+                &:hover {
+                    span {
+                        background: $color-primary;
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,265 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&display=swap');
+
+// Gotham
+@font-face {
+    font-family: "Gotham-Black";
+    src: url("../fonts/Gotham/Gotham-Black.otf") format("opentype");
+}
+@font-face {
+    font-family: "Gotham-Bold";
+    src: url("../fonts/Gotham/Gotham-Bold.ttf") format("truetype");
+}
+@font-face {
+    font-family: "Gotham-Book";
+    src: url("../fonts/Gotham/Gotham-Book.otf") format("opentype");
+}
+@font-face {
+    font-family: "Gotham-Light";
+    src: url("../fonts/Gotham/Gotham-Light.otf") format("opentype");
+}
+@font-face {
+    font-family: "Gotham-Medium";
+    src: url("../fonts/Gotham/Gotham-Medium.otf") format("opentype");
+}
+@font-face {
+    font-family: "GothamNarrow-Bold";
+    src: url("../fonts/Gotham/GothamNarrow-Bold.otf") format("opentype");
+}
+
+// Lato
+@font-face {
+    font-family: "Lato-Black";
+    src: url("../fonts/Lato/Lato-Black.ttf") format("truetype");
+}
+@font-face {
+    font-family: "Lato-BlackItalic";
+    src: url("../fonts/Lato/Lato-BlackItalic.ttf") format("truetype");
+}
+@font-face {
+    font-family: "Lato-Bold";
+    src: url("../fonts/Lato/Lato-Bold.ttf") format("truetype");
+}
+@font-face {
+    font-family: "Lato-BoldItalic";
+    src: url("../fonts/Lato/Lato-BoldItalic.ttf") format("truetype");
+}
+@font-face {
+    font-family: "Lato-Hairline";
+    src: url("../fonts/Lato/Lato-Hairline.ttf") format("truetype");
+}
+@font-face {
+    font-family: "Lato-HairlineItalic";
+    src: url("../fonts/Lato/Lato-HairlineItalic.ttf") format("truetype");
+}
+@font-face {
+    font-family: "Lato-Heavy";
+    src: url("../fonts/Lato/Lato-Heavy.ttf") format("truetype");
+}
+@font-face {
+    font-family: "Lato-HeavyItalic";
+    src: url("../fonts/Lato/Lato-HeavyItalic.ttf") format("truetype");
+}
+@font-face {
+    font-family: "Lato-Italic";
+    src: url("../fonts/Lato/Lato-Italic.ttf") format("truetype");
+}
+@font-face {
+    font-family: "Lato-Light";
+    src: url("../fonts/Lato/Lato-Light.ttf") format("truetype");
+}
+@font-face {
+    font-family: "Lato-LightItalic";
+    src: url("../fonts/Lato/Lato-LightItalic.ttf") format("truetype");
+}
+@font-face {
+    font-family: "Lato-Medium";
+    src: url("../fonts/Lato/Lato-Medium.ttf") format("truetype");
+}
+@font-face {
+    font-family: "Lato-MediumItalic";
+    src: url("../fonts/Lato/Lato-MediumItalic.ttf") format("truetype");
+}
+@font-face {
+    font-family: "Lato-Regular";
+    src: url("../fonts/Lato/Lato-Regular.ttf") format("truetype");
+}
+@font-face {
+    font-family: "Lato-Semibold";
+    src: url("../fonts/Lato/Lato-Semibold.ttf") format("truetype");
+}
+@font-face {
+    font-family: "Lato-SemiboldItalic";
+    src: url("../fonts/Lato/Lato-SemiboldItalic.ttf") format("truetype");
+}
+@font-face {
+    font-family: "Lato-Thin";
+    src: url("../fonts/Lato/Lato-Thin.ttf") format("truetype");
+}
+@font-face {
+    font-family: "Lato-ThinItalic";
+    src: url("../fonts/Lato/Lato-ThinItalic.ttf") format("truetype");
+}
+
+// Authentic-Signature
+@font-face {
+    font-family: "Authentic-Signature";
+    src: url("../fonts/Authentic-Signature.ttf") format("truetype");
+}
+
+// BigNoodleTitling
+@font-face {
+    font-family: "BigNoodleTitling";
+    src: url("../fonts/BigNoodleTitling/big_noodle_titling.ttf") format("truetype");
+}
+@font-face {
+    font-family: "BigNoodleTitlingOblique";
+    src: url("../fonts/BigNoodleTitling/big_noodle_titling_oblique.ttf") format("truetype");
+}
+
+// Etelka
+@font-face {
+    font-family: "EtelkaLight";
+    src: url("../fonts/Etelka/EtelkaLight.otf") format("opentype");
+}
+@font-face {
+    font-family: "EtelkaMedium";
+    src: url("../fonts/Etelka/EtelkaMedium.otf") format("opentype");
+}
+@font-face {
+    font-family: "EtelkaLightItalic";
+    src: url("../fonts/Etelka/EtelkaLightItalic.otf") format("opentype");
+}
+@font-face {
+    font-family: "EtelkaMediumItalic";
+    src: url("../fonts/Etelka/EtelkaMediumItalic.otf") format("opentype");
+}
+
+// Berlingske Serif Bold
+@font-face {
+    font-family: "Berlingske";
+    src: url("../fonts/Berlingske/BerlingskeSerifBold.ttf") format("truetype");
+}
+
+// AmsiPro
+@font-face {
+    font-family: "AmsiPro-Light";
+    src: url("../fonts/AmsiPro/AmsiPro-Light.ttf") format("truetype");
+}
+@font-face {
+    font-family: "AmsiPro-Regular";
+    src: url("../fonts/AmsiPro/AmsiPro-Regular.ttf") format("truetype");
+}
+@font-face {
+    font-family: "AmsiPro-Bold";
+    src: url("../fonts/AmsiPro/AmsiPro-Bold.ttf") format("truetype");
+}
+
+// Hero
+@font-face {
+    font-family: "Hero";
+    src: url("../fonts/Hero/Hero.otf") format("opentype");
+}
+@font-face {
+    font-family: "Hero-Light";
+    src: url("../fonts/Hero/Hero-Light.otf") format("opentype");
+}
+
+// Sinkin Sans
+@font-face {
+    font-family: "SinkinSans-Thin";
+    src: url("../fonts/SinkinSans/SinkinSans-Thin.otf") format("opentype");
+}
+@font-face {
+    font-family: "SinkinSans-ExtraLight";
+    src: url("../fonts/SinkinSans/SinkinSans-ExtraLight.otf") format("opentype");
+}
+@font-face {
+    font-family: "SinkinSans-Light";
+    src: url("../fonts/SinkinSans/SinkinSans-Light.otf") format("opentype");
+}
+@font-face {
+    font-family: "SinkinSans-Regular";
+    src: url("../fonts/SinkinSans/SinkinSans-Regular.otf") format("opentype");
+}
+@font-face {
+    font-family: "SinkinSans-Medium";
+    src: url("../fonts/SinkinSans/SinkinSans-Medium.otf") format("opentype");
+}
+@font-face {
+    font-family: "SinkinSans-SemiBold";
+    src: url("../fonts/SinkinSans/SinkinSans-SemiBold.otf") format("opentype");
+}
+@font-face {
+    font-family: "SinkinSans-Bold";
+    src: url("../fonts/SinkinSans/SinkinSans-Bold.otf") format("opentype");
+}
+@font-face {
+    font-family: "SinkinSans-Black";
+    src: url("../fonts/SinkinSans/SinkinSans-Black.otf") format("opentype");
+}
+@font-face {
+    font-family: "SinkinSans-ExtraBlack";
+    src: url("../fonts/SinkinSans/SinkinSans-ExtraBlack.otf") format("opentype");
+}
+
+//  CiutadellaSlabW04-Bold
+@font-face {
+    font-family: "CiutadellaSlabW04-Bold";
+    src: url("../fonts/Gotham/CiutadellaSlabW04-Bold.ttf") format("truetype");
+}
+
+// Avenir
+@font-face {
+    font-family: "Avenir";
+    src: url("../fonts/Avenir/Avenir.ttf") format("truetype");
+}
+@font-face {
+    font-family: "Avenir-Black";
+    src: url("../fonts/Avenir/AvenirLTStd-Black.otf") format("opentype");
+}
+@font-face {
+    font-family: "Avenir-BlackOblique";
+    src: url("../fonts/Avenir/AvenirLTStd-BlackOblique.otf") format("opentype");
+}
+@font-face {
+    font-family: "Avenir-Book";
+    src: url("../fonts/Avenir/AvenirLTStd-Book.otf") format("opentype");
+}
+@font-face {
+    font-family: "Avenir-BookOblique";
+    src: url("../fonts/Avenir/AvenirLTStd-BookOblique.otf") format("opentype");
+}
+@font-face {
+    font-family: "Avenir-Heavy";
+    src: url("../fonts/Avenir/AvenirLTStd-Heavy.otf") format("opentype");
+}
+@font-face {
+    font-family: "Avenir-HeavyOblique";
+    src: url("../fonts/Avenir/AvenirLTStd-HeavyOblique.otf") format("opentype");
+}
+@font-face {
+    font-family: "Avenir-Light";
+    src: url("../fonts/Avenir/AvenirLTStd-Light.otf") format("opentype");
+}
+@font-face {
+    font-family: "Avenir-LightOblique";
+    src: url("../fonts/Avenir/AvenirLTStd-LightOblique.otf") format("opentype");
+}
+@font-face {
+    font-family: "Avenir-Medium";
+    src: url("../fonts/Avenir/AvenirLTStd-Medium.otf") format("opentype");
+}
+@font-face {
+    font-family: "Avenir-MediumOblique";
+    src: url("../fonts/Avenir/AvenirLTStd-MediumOblique.otf") format("opentype");
+}
+@font-face {
+    font-family: "Avenir-Oblique";
+    src: url("../fonts/Avenir/AvenirLTStd-Oblique.otf") format("opentype");
+}
+@font-face {
+    font-family: "Avenir-Roman";
+    src: url("../fonts/Avenir/AvenirLTStd-Roman.otf") format("opentype");
+}

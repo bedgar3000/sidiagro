@@ -1,0 +1,79 @@
+.main-single {
+    &.layout-1 {
+        padding: 45px 0 45px;
+
+        .section-content {
+            .content {
+                padding: 0;
+                font-size: 16px;
+                font-weight: $font-weight-regular;
+                line-height: 1.5;
+                color: $color-default;
+                font-family: $font-family-general;
+
+                .figure {
+                    width: 100%;
+
+                    .figure-img {
+                        width: 100%;
+                        height: auto;
+                        max-height: 546px;
+                        object-fit: cover;
+                    }
+
+                    .figure-caption {
+                        padding: 0;
+                        margin: 0;
+                        display: flex;
+                        align-items: center;
+                        justify-content: space-between;
+
+                        .figure-share {
+                            display: flex;
+                            align-items: center;
+                            gap: 7.5px;
+                        }
+                    }
+                }
+
+                .title {
+                    margin-top: 0;
+                    margin-bottom: 30px;
+                    padding: 0;
+                    font-size: 32px;
+                    font-weight: $font-weight-bold;
+                    line-height: 1.2;
+                    color: $color-primary;
+                    font-family: $font-family-title;
+                }
+            }
+
+            .sidebar {
+                padding: 0;
+            }
+        }
+    }
+}
+
+@media(max-width: 767px) {
+    .main-single.layout-1 .section-content .content .figure .figure-caption {
+        flex-direction: column-reverse;
+        align-items: flex-start;
+        gap: 20px;
+    }
+
+    .main-single.layout-1 .section-content .content .figure .figure-caption .figure-share {
+        width: 100%;
+        justify-content: flex-end;
+    }
+}
+
+@media(max-width: 575px) {
+    .main-single.layout-1 .section-content .content {
+        font-size: 14px;
+        line-height: 1.5;
+    }
+    .main-single.layout-1 .section-content .content .title {
+        font-size: 22px;
+    }
+}

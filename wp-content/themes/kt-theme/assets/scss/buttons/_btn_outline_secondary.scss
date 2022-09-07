@@ -1,0 +1,18 @@
+.btn {
+    &.btn-outline-secondary {
+        color: $color-default !important;
+        background-color: transparent;
+        border-color: $color-secondary;
+
+        &:not(:disabled):not(.disabled):active,
+        &:not(:disabled):not(.disabled):active:focus,
+        &:focus,
+        &:active,
+        &:hover {
+            box-shadow: none;
+            background-color: $color-secondary;
+            border-color: $color-secondary;
+            color: #fff !important;
+        }
+    }
+}

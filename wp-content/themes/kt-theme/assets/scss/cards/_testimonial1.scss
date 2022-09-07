@@ -1,0 +1,85 @@
+.card {
+    &.testimonial-1 {
+        border: 1px solid #E7EDF7;
+        box-shadow: none;
+        height: 100%;
+        border-radius: 10px;
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            gap: 10px;
+            min-height: 0;
+            background-color: transparent;
+            border-bottom: 0;
+            padding: 1.25rem 1.75rem;
+
+            .card-image {
+                width: 79px;
+                height: 79px;
+                min-width: 79px;
+                border-radius: 100%;
+            }
+
+            .card-title {
+                width: 100%;
+                max-width: calc(100% - 79px - 10px);
+                margin-bottom: 0;
+
+                .name {
+                    font-size: 27px;
+                    font-family: $font-family-general;
+                    font-weight: $font-weight-regular;
+                    line-height: 1.1;
+                    color: $color-default;
+                }
+
+                .job {
+                    font-size: 14px;
+                    font-family: $font-family-general;
+                    font-weight: $font-weight-medium;
+                    line-height: 1.2;
+                    color: $color-default;
+                }
+            }
+        }
+
+        .card-body {
+            padding: 0 1.75rem 1.75rem;
+
+            .card-action {
+                margin: 20px 0;
+
+                a {
+                    color: $color-primary !important;
+
+                    &:hover {
+                        color: $color-secondary !important;
+
+                        .icon-btn-go-primary {
+                            background-image: url(../img/icons/icon-btn-go-secondary.svg);
+                        }
+                    }
+                }
+            }
+
+            .card-text {
+                margin: 0 0;
+                font-size: 17px;
+                line-height: 1.5;
+                font-weight: $font-weight-regular;
+                font-family: $font-family-general;
+
+                overflow: hidden;
+                display: -webkit-box;
+                -webkit-line-clamp: 5;
+                -webkit-box-orient: vertical;
+            }
+        }
+
+        &:hover {
+            border: 1px solid $color-primary;
+        }
+    }
+}

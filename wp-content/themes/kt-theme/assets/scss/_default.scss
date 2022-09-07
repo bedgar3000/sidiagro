@@ -1,0 +1,246 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    font-family: $font-family-general;
+    font-weight: $font-weight-regular;
+    font-size: 16px;
+    line-height: 26px;
+    color: $color-default;
+}
+
+p {
+    margin-bottom: 20px;
+}
+
+a {
+    color: $color-default !important;
+
+    &:hover {
+        color: $color-primary !important;
+        text-decoration: none;
+    }
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: $font-family-title;
+    color: $color-default;
+    font-weight: $font-weight-extra-bold;
+}
+
+h1 {
+    font-family: $font-family-title;
+    font-size: 46px;
+    letter-spacing: -1px;
+}
+
+h2 {
+    font-size: 36px;
+}
+
+h3 {
+    font-size: 30px;
+}
+
+h4 {
+    font-size: 24px;
+}
+
+h5 {
+    font-size: 20px;
+}
+
+h6 {
+    font-size: 18px;
+}
+
+b, strong {
+    font-weight: $font-weight-bold;
+}
+
+.pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 30px 0;
+    padding: 0;
+
+    .page-numbers {
+        padding: 0;
+        margin: 0 5px;
+        width: 30px;
+        height: 30px;
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 12px;
+        font-weight: $font-weight-medium;
+        font-family: $font-family-general;
+        border-radius: 4px;
+
+        &.prev,
+        &.next {
+            font-size: 0;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: 7px 12px;
+        }
+
+        &.prev {
+            background-image: url(../img/icons/icon-pagination-prev.svg);
+        }
+
+        &.next {
+            background-image: url(../img/icons/icon-pagination-next.svg);
+        }
+
+        &.current {
+            background-color: $color-secondary;
+            color: #fff;
+        }
+
+        &:hover {
+            color: $color-secondary;
+        }
+    }
+}
+
+.share-buttons {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    .share-button {
+        width: 38px;
+        height: 38px;
+        min-width: 38px;
+        min-height: 38px;
+        border-radius: 100%;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid $color-primary;
+        background-color: #fff;
+        color: $color-primary !important;
+        font-size: 18px;
+
+        &:hover {
+            background-color: $color-primary;
+            color: #fff !important;
+        }
+    }
+}
+
+.star {
+    position: relative;
+    display: inline-block;
+    width: 0;
+    height: 0;
+    margin-left: .6em;
+    margin-right: .6em;
+    margin-bottom: .9em;
+    border-right:  .3em solid transparent;
+    border-bottom: .7em  solid #FC0;
+    border-left:   .3em solid transparent;
+    font-size: 24px;
+    
+    &:before, &:after {
+        content: '';
+        display: block;
+        width: 0;
+        height: 0;
+        position: absolute;
+        top: .6em;
+        left: -1em;
+        border-right:  1em solid transparent;
+        border-bottom: .7em  solid #FC0;
+        border-left:   1em solid transparent;
+        transform: rotate(-35deg);
+    }
+    
+    &:after {  
+        transform: rotate(35deg);
+    }
+
+    &.star-default {
+        border-bottom: .7em  solid $color-default;
+    
+        &:before, &:after {
+            border-bottom: .7em  solid $color-default;
+        }
+    }
+
+    &.star-sm {
+        font-size: 8px;
+    }
+}
+
+.underline {
+    @include underline;
+    
+    &:hover:after {
+        max-width: 100%;
+    }
+}
+
+.underline-title {
+    margin-bottom: 60px;
+    text-align: center;
+    
+    @include underline;
+}
+
+.line {
+    width: 100%;
+    height: 1px;
+    background-color: #ddd;
+}
+
+.gap-1 { gap: 5px; }
+.gap-2 { gap: 10px; }
+.gap-3 { gap: 15px; }
+
+.color-primary { color: $color-primary !important; }
+
+@media(min-width: 1400px) {
+    .container {
+        max-width: 1310px;
+    }
+}
+
+@media(min-width: 1600px) {
+    .container {
+        max-width: 1430px;
+    }
+}
+
+@media(max-width: 575px) {
+    h1 {
+        font-size: 32px;
+    }
+}
+
+.table {
+    &.table-striped {
+        thead {
+            th {
+                height: 58px;
+                vertical-align: middle;
+            }
+        }
+
+        tbody {
+            td {
+                height: 77px;
+                vertical-align: middle;
+            }
+        }
+
+        tbody tr:nth-of-type(odd) {
+            background-color: #eee;
+        }
+
+        tbody tr:nth-of-type(even) {
+            background-color: #f8f8f8;
+        }
+    }
+}

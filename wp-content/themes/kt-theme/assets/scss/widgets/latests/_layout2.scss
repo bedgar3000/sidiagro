@@ -1,0 +1,60 @@
+.widget-latest {
+    &.layout-2 {
+        .widget-title {
+            font-size: 24px;
+            line-height: 24px;
+            color: $color-default;
+            margin-bottom: 0;
+
+            b, strong {
+                color: $color-primary;
+            }
+        }
+
+        .widget-item {
+            display: block;
+            width: 100%;
+            margin: 0 0 30px;
+            color: $color-default;
+
+            .widget-item-image {
+            }
+
+            .widget-item-content {
+                .widget-item-date {
+                    font-size: 12px;
+                    font-weight: $font-weight-bold;
+                    font-family: $font-family-general;
+                    line-height: 1;
+                    margin: 5px 0;
+                    color: $color-default;
+                }
+
+                .widget-item-title {
+                    font-size: 16px;
+                    font-weight: $font-weight-medium;
+                    font-family: $font-family-general;
+                    line-height: 1.1;
+                    margin: 0 0;
+                    color: $color-default;
+                }
+            }
+
+            &:hover {
+                .widget-item-content {
+                    .widget-item-title {
+                        color: $color-default !important;
+                    }
+
+                    .widget-item-title {
+                        color: $color-default-dark !important;
+                    }
+                }
+            }
+        }
+
+        .line {
+            margin: 15px 0;
+        }
+    }
+}

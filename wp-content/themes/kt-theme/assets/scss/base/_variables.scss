@@ -1,0 +1,76 @@
+// colores
+$color-primary-light: #2760b1;
+$color-primary: #0E3977;
+$color-primary-1: #0E3977;
+$color-primary-2: #0E3977;
+$color-primary-dark: #062653;
+$color-secondary: #8EC14B;
+$color-secondary-1: #8EC14B;
+$color-secondary-2: #8EC14B;
+$color-secondary-3: #8EC14B;
+$color-secondary-dark: #608d25;
+$color-default: #333333;
+$color-default-1: #666666;
+$color-default-2: #666666;
+$color-default-dark: #000000;
+$color-danger-light: #D58686;
+$color-danger: #EE171F;
+$color-danger-dark: #8d0509;
+$color-orange: #EE4338;
+$color-orange-dark: #ac1f15;
+$color-success-light: #BFDFBF;
+$color-success: #0E763D;
+$color-success-dark: #054b24;
+
+// font weights
+$font-weight-thin: 100;
+$font-weight-extra-light: 200;
+$font-weight-light: 300;
+$font-weight-regular: 400;
+$font-weight-medium: 500;
+$font-weight-semi-bold: 600;
+$font-weight-bold: 700;
+$font-weight-extra-bold: 800;
+$font-weight-black: 900;
+
+// font families
+$font-family-general: 'Montserrat', sans-serif;
+$font-family-title: 'Montserrat', sans-serif;
+
+// menu
+$header-bg-color: #fff;
+$header-bg-color-scroll: #fff;
+$header-color: #fff !important;
+$header-color-active: #fff !important;
+$header-color-line: #fff;
+$header-color-line-active: #fff;
+$header-toggle-color: $color-default;
+$header-font-weight: $font-weight-bold;
+$header-font-family: $font-family-general;
+$header-font-size: 17px;
+$header-logo-height: 116px;
+$header-logo-height-scroll: 116px;
+$header-logo-height-mobile: 116px;
+$header-logo-height-mobile-scroll: 116px;
+
+.bg-primary {
+    background-color: $color-primary !important;
+}
+.bg-success {
+    background-color: $color-success !important;
+}
+.bg-danger {
+    background-color: $color-danger !important;
+}
+.bg-success-light {
+    background-color: $color-success-light !important;
+}
+.bg-danger-light {
+    background-color: $color-danger-light !important;
+}
+.table-primary tbody+tbody, .table-primary td, .table-primary th, .table-primary thead th {
+    border-color: $color-primary;
+}
+.table-primary, .table-primary>td, .table-primary>th {
+    background-color: $color-primary;
+}

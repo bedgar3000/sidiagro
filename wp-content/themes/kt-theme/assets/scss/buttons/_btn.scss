@@ -1,0 +1,39 @@
+.btn {
+    font-size: 15px;
+    font-family: $font-family-general;
+    font-weight: $font-weight-bold;
+    height: 43px;
+    padding: 8px 16px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7.5px;
+
+    &.btn-lg {
+        height: 60px;
+        font-size: 16px;
+        font-weight: $font-weight-bold;
+    }
+
+    &.btn-pill {
+        border-radius: 25px !important;
+        padding: 8px 32px !important;
+
+        &.w-icon {
+            padding: 8px 38px;
+        }
+    }
+
+    &.w-icon {
+        align-items: center;
+        display: inline-flex;
+        gap: 6px;
+        justify-content: center;
+    }
+}
+
+@media(max-width: 767px) {
+    .btn {
+        font-size: 12px;
+    }
+}

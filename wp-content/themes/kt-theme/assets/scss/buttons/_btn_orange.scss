@@ -1,0 +1,18 @@
+.btn {
+    &.btn-orange {
+        background-color: $color-orange;
+        border-color: $color-orange;
+        color: #fff;
+
+        &:not(:disabled):not(.disabled):active,
+        &:not(:disabled):not(.disabled):active:focus,
+        &:focus,
+        &:active,
+        &:hover {
+            background-color: $color-orange-dark;
+            border-color: $color-orange-dark;
+            box-shadow: none;
+            color: #fff !important;
+        }
+    }
+}

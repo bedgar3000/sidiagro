@@ -1,0 +1,34 @@
+.section-info {
+    &.layout-1 {
+        padding: 90px 0 75px;
+
+        .info {
+            font-size: 16px;
+            line-height: 1.6;
+            font-weight: $font-weight-regular;
+            width: 100%;
+            max-width: 1000px;
+            margin: auto;
+            text-align: center;
+
+            h1 {
+                margin-bottom: 50px;
+                @include underline;
+            }
+
+            .link {
+                padding: 30px 0;
+                text-align: center;
+            }
+        }
+    }
+}
+
+@media(max-width: 575px) {
+    .section-info.layout-1 {
+        padding: 45px 0 30px;
+    }
+    .section-info.layout-1 .info {
+        font-size: 14px;
+    }
+}

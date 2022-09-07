@@ -1,0 +1,79 @@
+.contact-form {
+    &.form-3 {
+        .wpforms-container {
+            .wpforms-form {
+                .wpforms-field-container {
+                    display: flex;
+                    gap: 15px;
+                    flex-wrap: wrap;
+
+                    .wpforms-field {
+                        width: 100%;
+                        padding: 0 0;
+
+                        .wpforms-field-small,
+                        .wpforms-field-medium,
+                        .wpforms-field-large {
+                            width: 100%;
+                            max-width: 100%;
+                            min-height: 40px;
+                            background-color: #fff;
+                            border-color: #fff;
+                            border-radius: 0;
+                            box-shadow: none;
+                            color: #333;
+                            font-size: 14px;
+                            font-weight: $font-weight-regular;
+                            line-height: 1;
+
+                            &:focus {
+                                border-color: $color-primary;
+                            }
+                        }
+
+                        &.wpforms-one-half {
+                            max-width: calc(50% - 7.5px);
+                            margin-left: 0;
+                        }
+                    }
+                }
+
+                .wpforms-submit-container {
+                    .wpforms-submit {
+                        background-color: transparent;
+                        border-color: $color-primary;
+                        color: $color-primary;
+                        border-radius: 0;
+                        
+                        font-size: 15px;
+                        font-family: $font-family-general;
+                        font-weight: $font-weight-bold;
+                        height: 43px;
+                        padding: 8px 16px;
+                        display: inline-flex;
+                        align-items: center;
+                        justify-content: center;
+                        gap: 7.5px;
+                
+                        &:not(:disabled):not(.disabled):active,
+                        &:not(:disabled):not(.disabled):active:focus,
+                        &:focus,
+                        &:active,
+                        &:hover {
+                            background-color: $color-primary-dark;
+                            border-color: $color-primary-dark;
+                            box-shadow: none;
+                            color: #fff;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media(max-width: 575px) {
+    .contact-form.form-3 .wpforms-container .wpforms-form .wpforms-field-container .wpforms-field.wpforms-one-half {
+        max-width: 100%;
+    }
+}

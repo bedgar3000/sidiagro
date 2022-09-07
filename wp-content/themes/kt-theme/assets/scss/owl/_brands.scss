@@ -1,0 +1,25 @@
+.owl-carousel {
+    &.owl-brands {
+        .owl-item {
+            .item {
+                min-height: 200px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+
+                img {
+                    width: auto;
+                    max-width: 100%;
+                    height: auto;
+                }
+            }
+        }
+    }
+}
+
+@media(max-width: 575px) {
+    .owl-carousel.owl-brands .owl-item .item {
+        min-height: 125px;
+        max-height: 125px;
+    }
+}

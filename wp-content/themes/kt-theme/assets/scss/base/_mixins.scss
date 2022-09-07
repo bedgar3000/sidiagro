@@ -1,0 +1,34 @@
+@mixin list-style {
+    list-style-type: none;
+    padding: 0;
+
+    li {
+        padding-left: 39px;
+        margin: 15px 0;
+        background-image: url(../img/icons/icon-list-style-primary.svg);
+        background-position: left 0;
+        background-repeat: no-repeat;
+        background-size: 26px 25px;
+        min-height: 25px;
+    }
+}
+
+@mixin underline {
+    text-decoration: none; 
+    position: relative;
+    color: $color-primary;
+
+    &:after {
+        position: absolute;
+        content: '';
+        height: 3px;
+        bottom: -20px;
+        margin: 0 auto;
+        left: 0;
+        right: 0;
+        width: 100%;
+        max-width: 77px;
+        background: $color-secondary;
+        transition:.5s;
+    }
+}

@@ -1,0 +1,22 @@
+.btn {
+    &.btn-outline-primary {
+        color: $color-primary !important;
+        background-color: transparent;
+        border-color: $color-primary;
+
+        &:not(:disabled):not(.disabled):active,
+        &:not(:disabled):not(.disabled):active:focus,
+        &:focus,
+        &:active,
+        &:hover {
+            box-shadow: none;
+            background-color: $color-primary;
+            border-color: $color-primary;
+            color: #fff !important;
+
+            .icon-btn-go-primary {
+                background-image: url(../img/icons/icon-btn-go-white.svg);
+            }
+        }
+    }
+}

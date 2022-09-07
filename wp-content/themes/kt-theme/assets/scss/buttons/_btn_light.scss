@@ -1,0 +1,51 @@
+.btn {
+    &.btn-light {
+        background-color: #fff;
+        border-color: #fff;
+        color: $color-default-1;
+
+        &:not(:disabled):not(.disabled):active,
+        &:not(:disabled):not(.disabled):active:focus,
+        &:focus,
+        &:active,
+        &:hover {
+            background-color: #f8f9fa;
+            border-color: #f8f9fa;
+            box-shadow: none;
+        }
+         
+        &.h-primary {
+            &:not(:disabled):not(.disabled):active,
+            &:not(:disabled):not(.disabled):active:focus,
+            &:focus,
+            &:active,
+            &:hover {
+                background-color: $color-primary;
+                border-color: $color-primary;
+                box-shadow: none;
+                color: #fff;
+
+                .icon-btn-go {
+                    background-image: url(../img/icons/icon-btn-go-white.svg);
+                }
+            }
+        }
+         
+        &.h-secondary {
+            &:not(:disabled):not(.disabled):active,
+            &:not(:disabled):not(.disabled):active:focus,
+            &:focus,
+            &:active,
+            &:hover {
+                background-color: $color-secondary;
+                border-color: $color-secondary;
+                box-shadow: none;
+                color: #fff;
+
+                .icon-btn-go {
+                    background-image: url(../img/icons/icon-btn-go-white.svg);
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,39 @@
+.widget-latest {
+    &.layout-1 {
+        .widget-title {
+            font-size: 32px;
+            font-weight: $font-weight-regular;
+            line-height: 40px;
+            color: $color-secondary;
+            margin-bottom: 15px;
+        }
+
+        .widget-item {
+            display: block;
+            width: 100%;
+            margin: 0 0;
+            color: $color-default;
+
+            small {
+                font-size: 12px;
+                font-weight: $font-weight-bold;
+                line-height: 18px;
+            }
+            
+            p {
+                font-size: 14px;
+                font-weight: $font-weight-regular;
+                line-height: 20px;
+                margin: 0 0 0 0;
+            }
+
+            &:hover {
+                color: $color-secondary;
+            }
+        }
+
+        .line {
+            margin: 15px 0;
+        }
+    }
+}

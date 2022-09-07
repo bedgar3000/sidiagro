@@ -1,0 +1,77 @@
+.section-banner {
+    &.banner-2 {
+        position: relative;
+
+        img {
+            min-height: 200px;
+            object-fit: cover;
+            width: 100%;
+            height: 100%;
+        }
+
+        .content {
+            padding: 60px 15px;
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            display: flex;
+            align-items: center;
+
+            .info {
+                color: #fff;
+                font-size: 20px;
+                font-weight: $font-weight-semi-bold;
+                line-height: 24px;
+                text-align: center;
+                max-width: 100%;
+                margin: auto;
+
+                h1 {
+                    color: #fff;
+                    font-size: 46px;
+                    font-weight: $font-weight-bold;
+                }
+
+                p {
+                    margin: 0 0 0 0;
+                }
+            }
+        }
+
+        &.overlay {
+            .content {
+                background-image: url(../img/misc/banner-overlay.png);
+                background-position: center;
+                background-repeat: no-repeat;
+                background-size: cover;
+            }
+        }
+    }
+}
+
+@media(max-width: 991px) {
+    .section-banner.banner-2 .content .info {
+        font-size: 16px;
+        line-height: 20px;
+    }
+}
+
+@media(max-width: 767px) {
+    .section-banner.banner-2 .content .info h1 {
+        font-size: 36px;
+        line-height: 1.4;
+    }
+}
+
+@media(max-width: 575px) {
+    .section-banner.banner-2 .content .info h1 {
+        font-size: 24px;
+        line-height: 1.2;
+    }
+    .section-banner.banner-2 .content .info {
+        font-size: 14px;
+        line-height: 18px;
+    }
+}

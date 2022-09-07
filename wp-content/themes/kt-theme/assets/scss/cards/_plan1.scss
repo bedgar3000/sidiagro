@@ -1,0 +1,130 @@
+.card {
+    &.plan-1 {
+        border: 1px solid #E7EDF7;
+        box-shadow: 5px 5px 0px 0px rgba(248,250,253,1);
+        height: 100%;
+        margin-bottom: 45px;
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 75px;
+            background-color: transparent;
+            border-bottom: 1px solid #E7EDF7;
+
+            .card-title {
+                font-size: 33px;
+                font-family: $font-family-title;
+                font-weight: $font-weight-extra-bold;
+                line-height: 1;
+                color: $color-default;
+                letter-spacing: -1px;
+                margin-bottom: 0;
+            }
+        }
+
+        .card-body {
+            padding: 1.25rem 2.75rem;
+
+            .card-price {
+                margin: 20px 0;
+
+                .amount {
+                    font-size: 49px;
+                    font-family: $font-family-general;
+                    font-weight: $font-weight-extra-bold;
+                    color: $color-primary;
+                }
+                
+                .time {
+                    font-size: 23px;
+                    font-family: $font-family-general;
+                    font-weight: $font-weight-medium;
+                }
+                
+                .note {
+                    display: block;
+                    font-size: 18px;
+                    font-family: $font-family-general;
+                    font-weight: $font-weight-medium;
+                }
+            }
+
+            .card-action {
+                margin: 20px 0;
+            }
+
+            .card-text {
+                margin: 35px 0;
+                font-size: 17px;
+                line-height: 1.2;
+                font-weight: $font-weight-regular;
+                font-family: $font-family-general;
+
+                ul {
+                    @include list-style;
+                }
+            }
+        }
+
+        &.active {
+            border: 1px solid $color-primary;
+
+            .card-header {
+                border-bottom: 1px solid $color-primary;
+
+                .card-title {
+                    color: $color-primary;
+                }
+            }
+
+            .card-body {
+                .card-action {
+                    .btn-outline-primary {
+                        box-shadow: none;
+                        background-color: $color-primary;
+                        border-color: $color-primary;
+                        color: #fff !important;
+            
+                        .icon-btn-go-primary {
+                            background-image: url(../img/icons/icon-btn-go-white.svg);
+                        }
+                    }
+                }
+            }
+        }
+
+        &:hover {
+            .card-body {
+                .card-action {
+                    .btn-outline-primary {
+                        box-shadow: none;
+                        background-color: $color-primary;
+                        border-color: $color-primary;
+                        color: #fff !important;
+            
+                        .icon-btn-go-primary {
+                            background-image: url(../img/icons/icon-btn-go-white.svg);
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media(max-width: 991px) {
+    .card.plan-1 {
+        height: auto;
+    }
+}
+
+@media(max-width: 575px) {
+    .card.plan-1 .card-header .card-title {
+        font-size: 28px;
+    }
+    .card.plan-1 .card-body {
+        padding: 1.25rem 1.25rem;
+    }
+}

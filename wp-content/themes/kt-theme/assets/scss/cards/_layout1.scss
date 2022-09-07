@@ -1,0 +1,81 @@
+.card {
+    &.layout-1 {
+        margin: 20px 0;
+        background-color: #fff;
+        border-radius: 0;
+        border: 1px solid #E2E8EF;
+        box-shadow: 0px 0px 10px 0px rgba(226,232,239,1);
+        
+        .card-figure {
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            padding: 15px;
+            height: 250px;
+            width: 100%;
+
+            img {
+                max-width: 100%;
+            }
+        }
+
+        .card-body {
+            text-align: center;
+            height: 160px;
+            overflow: hidden;
+            
+            .card-title {
+                font-size: 23px;
+                font-weight: $font-weight-bold;
+                line-height: 1.3;
+                margin-bottom: 5px;
+            }
+
+            .card-text {
+                font-size: 16px;
+                font-weight: $font-weight-regular;
+                line-height: 1.3;
+                max-width: 328px;
+                margin: auto;
+            }
+        }
+
+        .card-action {
+            border-top: 1px solid rgba($color-primary, 0.20);
+            padding: 13px 0;
+            margin: 0 15px;
+            text-align: center;
+
+            div {
+                font-size: 14px;
+                font-weight: $font-weight-medium;
+                color: $color-primary !important;
+
+                &:hover {
+                    color: $color-primary-dark !important;
+                    text-decoration: none;
+                }
+            }
+        }
+
+        &:hover {
+            border: 1px solid $color-primary;
+            
+            .card-body {
+                .card-title {
+                    color: $color-primary-dark !important;
+                }
+                
+                .card-text {
+                    color: $color-default !important;
+                }
+            }
+
+            .card-action {
+                div {
+                    color: $color-primary-dark !important;
+                }
+            }
+        }
+    }
+}

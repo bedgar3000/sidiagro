@@ -1,0 +1,41 @@
+.section-info {
+    &.layout-3 {
+        padding: 0px 0 45px;
+        background-color: $color-primary;
+        color: #fff;
+
+        .info {
+            font-size: 16px;
+            line-height: 1.6;
+            font-weight: $font-weight-regular;
+            width: 100%;
+            max-width: 650px;
+            margin: auto;
+            text-align: center;
+
+            h1 {
+                color: #fff;
+                margin-bottom: 15px;
+            }
+
+            .link {
+                padding: 15px 0;
+                text-align: center;
+            }
+        }
+
+        .fav {
+            margin: -100px auto 15px calc(50% - 55px);
+            width: 218px;
+        }
+    }
+}
+
+@media(max-width: 575px) {
+    .section-info.layout-3 {
+        padding: 0 0 30px;
+    }
+    .section-info.layout-3 .info {
+        font-size: 14px;
+    }
+}

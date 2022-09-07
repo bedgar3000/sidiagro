@@ -1,0 +1,76 @@
+.contact-form {
+    &.form-2 {
+        .wpforms-container {
+            .wpforms-form {
+                .wpforms-field-container {
+                    display: flex;
+                    gap: 15px;
+                    flex-wrap: wrap;
+
+                    .wpforms-field {
+                        width: 100%;
+                        padding: 0 0;
+
+                        .wpforms-field-small,
+                        .wpforms-field-medium,
+                        .wpforms-field-large {
+                            width: 100%;
+                            max-width: 100%;
+                            min-height: 43px;
+                            background-color: #fff;
+                            border-color: #E7EDF7;
+                            border-radius: 5px;
+                            box-shadow: 5px 5px 0px 0px rgba(248,250,253,1);
+                            color: #333;
+                            font-size: 15px;
+                            font-weight: $font-weight-regular;
+                            line-height: 15px;
+
+                            &:focus {
+                                border-color: $color-primary;
+                            }
+                        }
+
+                        &.wpforms-one-half {
+                            max-width: calc(50% - 7.5px);
+                            margin-left: 0;
+                        }
+                    }
+                }
+
+                .wpforms-submit-container {
+                    text-align: center;
+                    padding: 30px 0 0;
+
+                    .wpforms-submit {
+                        width: 222px;
+                        height: 50px;
+
+                        &.btn-outline-secondary {
+                            color: $color-default !important;
+                            background-color: transparent;
+                            border-color: $color-secondary;
+                    
+                            &:not(:disabled):not(.disabled):active,
+                            &:not(:disabled):not(.disabled):active:focus,
+                            &:focus,
+                            &:active,
+                            &:hover {
+                                box-shadow: none;
+                                background-color: $color-secondary;
+                                border-color: $color-secondary;
+                                color: #fff !important;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media(max-width: 575px) {
+    .contact-form.form-2 .wpforms-container .wpforms-form .wpforms-field-container .wpforms-field.wpforms-one-half {
+        max-width: 100%;
+    }
+}

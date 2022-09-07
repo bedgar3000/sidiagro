@@ -1,0 +1,18 @@
+.btn {
+    &.btn-success {
+        background-color: $color-success;
+        border-color: $color-success;
+        color: #fff;
+
+        &:not(:disabled):not(.disabled):active,
+        &:not(:disabled):not(.disabled):active:focus,
+        &:focus,
+        &:active,
+        &:hover {
+            background-color: $color-success-dark;
+            border-color: $color-success-dark;
+            box-shadow: none;
+            color: #fff !important;
+        }
+    }
+}

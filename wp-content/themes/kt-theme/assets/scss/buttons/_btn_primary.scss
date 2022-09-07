@@ -1,0 +1,18 @@
+.btn {
+    &.btn-primary {
+        background-color: $color-primary;
+        border-color: $color-primary;
+        color: #fff;
+
+        &:not(:disabled):not(.disabled):active,
+        &:not(:disabled):not(.disabled):active:focus,
+        &:focus,
+        &:active,
+        &:hover {
+            background-color: $color-primary-dark;
+            border-color: $color-primary-dark;
+            box-shadow: none;
+            color: #fff !important;
+        }
+    }
+}

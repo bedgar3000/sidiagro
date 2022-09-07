@@ -1,0 +1,70 @@
+.section-urls {
+    padding: 100px 0;
+
+    .enlace-escudo {
+        text-align: center;
+    }
+
+    .item-enlace {
+        margin-bottom: 45px;
+        overflow: hidden;
+
+        span {
+            display: block;
+            font-size: 13px;
+            color: $color-default;
+            font-weight: $font-weight-light;
+        }
+        
+        a {
+            font-size: 13px;
+            color: $color-default;
+            font-weight: $font-weight-medium;
+
+            &:hover {
+                color: $color-default-1;
+            }
+        }
+    }
+
+    .form-categorias-url {
+        max-width: 260px;
+        margin: auto;
+        
+        .form-select {
+            height: 37px;
+            display: block;
+            width: 100%;
+            padding: 0.375rem 2.25rem 0.375rem 0.75rem;
+            font-size: 1rem;
+            font-weight: 400;
+            line-height: 1.5;
+            color: #212529;
+            background-color: #fff;
+            background-image: url(../img/icons/icon-caret-input.svg);
+            background-repeat: no-repeat;
+            background-position: right 0.75rem center;
+            background-size: 13px 7px;
+            border: 1px solid #ced4da;
+            border-radius: 0.25rem;
+            appearance: none;
+        }
+    }
+}
+
+@media(min-width: 1600px) {
+    .section-urls {
+        .container {
+            max-width: 1145px;
+        }
+    }
+}
+
+@media(max-width: 575px) {
+    .section-urls {
+        display: none;
+    }
+    .section-urls .item-enlace {
+        text-align: center;
+    }
+}
