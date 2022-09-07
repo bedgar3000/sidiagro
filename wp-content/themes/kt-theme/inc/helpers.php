@@ -984,3 +984,7 @@ if (!function_exists('getProvincias')) {
         return $provincias;
     }
 }
+
+function monitoreo() {
+    
+}
