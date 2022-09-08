@@ -621,5 +621,68 @@
                 }
             }
         }
+
+        #mapa {
+            position: relative;
+            overflow: hidden;
+            padding: 0px;
+
+            .acf-map {
+                height: 550px;
+            }
+        }
+
+        .mapa-sidebar {
+            position: absolute;
+            width: 350px;
+            z-index: 9999;
+            left: -350px;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.9);
+
+            .scroll {
+                height: 100%;
+            }
+
+            .close {
+                right: 5px;
+                top: 5px;
+                margin-right: 5px;
+                position: absolute;
+                cursor: pointer;
+
+                i {
+                    color: white;
+                    font-size: 15px;
+                    text-shadow: none;
+                }
+            }
+
+            .mapa-header {
+                background: rgba(67,174,191,1);
+                background: -moz-linear-gradient(-45deg, rgba(67,174,191,1) 0%, rgba(87,196,198,1) 100%);
+                background: -webkit-gradient(left top, right bottom, color-stop(0%, rgba(67,174,191,1)), color-stop(100%, rgba(87,196,198,1)));
+                background: -webkit-linear-gradient(-45deg, rgba(67,174,191,1) 0%, rgba(87,196,198,1) 100%);
+                background: -o-linear-gradient(-45deg, rgba(67,174,191,1) 0%, rgba(87,196,198,1) 100%);
+                background: -ms-linear-gradient(-45deg, rgba(67,174,191,1) 0%, rgba(87,196,198,1) 100%);
+                background: linear-gradient(135deg, rgba(67,174,191,1) 0%, rgba(87,196,198,1) 100%);
+                filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#43aebf', endColorstr='#57c4c6', GradientType=1 );
+                padding: 20px 20px 10px;
+                height: 112px;
+                
+                .mapa-title {
+                    span {
+                        color: white;
+                        font-size: 18px;
+                    }
+                }
+            }
+
+            .mapa-body {
+                padding: 15px 20px;
+                background: transparent;
+                height: 388px;
+            }
+        }
     }
 }

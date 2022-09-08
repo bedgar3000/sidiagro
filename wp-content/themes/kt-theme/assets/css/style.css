@@ -4409,3 +4409,51 @@ body:not(.home) .header-1 .start-header {
     margin-left: 0;
   }
 }
+.main-page-servicio.servicio-2 #mapa {
+  position: relative;
+  overflow: hidden;
+  padding: 0px;
+}
+.main-page-servicio.servicio-2 #mapa .acf-map {
+  height: 550px;
+}
+.main-page-servicio.servicio-2 .mapa-sidebar {
+  position: absolute;
+  width: 350px;
+  z-index: 9999;
+  left: -350px;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.9);
+}
+.main-page-servicio.servicio-2 .mapa-sidebar .scroll {
+  height: 100%;
+}
+.main-page-servicio.servicio-2 .mapa-sidebar .close {
+  right: 5px;
+  top: 5px;
+  margin-right: 5px;
+  position: absolute;
+  cursor: pointer;
+}
+.main-page-servicio.servicio-2 .mapa-sidebar .close i {
+  color: white;
+  font-size: 15px;
+  text-shadow: none;
+}
+.main-page-servicio.servicio-2 .mapa-sidebar .mapa-header {
+  background: rgb(67, 174, 191);
+  background: -webkit-gradient(left top, right bottom, color-stop(0%, rgb(67, 174, 191)), color-stop(100%, rgb(87, 196, 198)));
+  background: linear-gradient(135deg, rgb(67, 174, 191) 0%, rgb(87, 196, 198) 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr="#43aebf", endColorstr="#57c4c6", GradientType=1 );
+  padding: 20px 20px 10px;
+  height: 112px;
+}
+.main-page-servicio.servicio-2 .mapa-sidebar .mapa-header .mapa-title span {
+  color: white;
+  font-size: 18px;
+}
+.main-page-servicio.servicio-2 .mapa-sidebar .mapa-body {
+  padding: 15px 20px;
+  background: transparent;
+  height: 388px;
+}

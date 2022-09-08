@@ -821,72 +821,124 @@ add_action( 'wp_footer', function () {
  * Formulario Fitozoosanitaria
  */
 add_shortcode('form-monitoreo', function () {
-    $provincias = getProvincias();
+    global $wp;
+    $current_url = home_url( add_query_arg( array(), $wp->request ) );
+    
+    $periodos = get_terms('monitoreo-periodo', [
+        'hide_empty' => false,
+    ]);
+    $programas = get_terms('monitoreo-programa', [
+        'hide_empty' => false,
+    ]);
+    $formularios = get_terms('monitoreo-formulario', [
+        'hide_empty' => false,
+        'order' => 'DESC',
+    ]);
+    $trampas = get_terms('monitoreo-trampa', [
+        'hide_empty' => false,
+    ]);
+    $tecnicos = get_terms('monitoreo-tecnico', [
+        'hide_empty' => false,
+    ]);
+    $meses = getMonths();
+    $conditions = getConditions();
+    
+    $periodo_id = (empty($periodos[0]->term_id) ? '' : $periodos[0]->term_id);
+    $programa_id = (empty($programas[0]->term_id) ? '' : $programas[0]->term_id);
+    $formulario_id = (empty($formularios[0]->term_id) ? '' : $formularios[0]->term_id);
+
+    $_periodo = (empty($_GET['periodo']) ? $periodo_id : $_GET['periodo']);
+    $_mes = (empty($_GET['mes']) ? date('n') : $_GET['mes']);
+    $_programa = (empty($_GET['programa']) ? $programa_id : $_GET['programa']);
+    $_formulario = (empty($_GET['formulario']) ? $formulario_id : $_GET['formulario']);
+    $_trampa = (empty($_GET['trampa']) ? '' : $_GET['trampa']);
+    $_tecnico = (empty($_GET['tecnico']) ? '' : $_GET['tecnico']);
+    $_condicion = (empty($_GET['condicion']) ? '' : $_GET['condicion']);
     ?>
 
     <div class="contact-form form-4">
         <h3 class="form-subtitle"><?php echo __('Filtros','ktech'); ?></h3>
-
-        <div class="wrapper">
-            <div class="form-row">
-                <div class="form-group col-lg-3 col-md-4">
-                    <label class="label-title"><?php echo __('Año','ktech'); ?></label>
-                    <select name="filtro_anio" id="filtro-anio" class="form-control">
-                        <option value=""><?php echo __('Seleccione','ktech'); ?></option>
-                    </select>
-                </div>
-                
-                <div class="form-group col-lg-3 col-md-4">
-                    <label class="label-title"><?php echo __('Mes','ktech'); ?></label>
-                    <select name="filtro_mes" id="filtro-mes" class="form-control">
-                        <option value=""><?php echo __('Todos','ktech'); ?></option>
-                    </select>
-                </div>
-                
-                <div class="form-group col-lg-3 col-md-4">
-                    <label class="label-title"><?php echo __('Programa bajo vigilancia','ktech'); ?></label>
-                    <select name="filtro_programa" id="filtro-programa" class="form-control">
-                        <option value=""><?php echo __('Seleccione','ktech'); ?></option>
-                    </select>
-                </div>
-                
-                <div class="form-group col-lg-3 col-md-4">
-                    <label class="label-title"><?php echo __('Tipo de formulario','ktech'); ?></label>
-                    <select name="filtro_formulario" id="filtro-formulario" class="form-control">
-                        <option value=""><?php echo __('Todos','ktech'); ?></option>
-                    </select>
-                </div>
-                
-                <div class="form-group col-lg-3 col-md-4">
-                    <label class="label-title"><?php echo __('Trampa','ktech'); ?></label>
-                    <select name="filtro_trampa" id="filtro-trampa" class="form-control">
-                        <option value=""><?php echo __('Todos','ktech'); ?></option>
-                    </select>
-                </div>
-                
-                <div class="form-group col-lg-3 col-md-4">
-                    <label class="label-title"><?php echo __('Técnico','ktech'); ?></label>
-                    <select name="filtro_tecnico" id="filtro-tecnico" class="form-control">
-                        <option value=""><?php echo __('Todos','ktech'); ?></option>
-                    </select>
-                </div>
-                
-                <div class="form-group col-lg-3 col-md-4">
-                    <label class="label-title"><?php echo __('Condicion de Plaga','ktech'); ?></label>
-                    <select name="filtro_condicion" id="filtro-condicion" class="form-control">
-                        <option value=""><?php echo __('Todos','ktech'); ?></option>
-                    </select>
-                </div>
-                
-                <div class="form-group col-lg-3 col-md-4">
-                    <label class="label-title">&nbsp;</label>
-                    <button type="submit" class="btn btn-primary">
-                        <i class="icon icon-btn-go-white"></i>
-                        <span><?php echo __('Generar Mapa','ktech'); ?></span>
-                    </button>
+        
+        <form action="<?php echo $current_url; ?>" method="get">
+            <div class="wrapper">
+                <div class="form-row">
+                    <div class="form-group col-lg-3 col-md-4">
+                        <label class="label-title"><?php echo __('Año','ktech'); ?></label>
+                        <select name="periodo" id="filtro-anio" class="form-control">
+                            <?php foreach ($periodos as $item): ?>
+                                <option value="<?php echo $item->term_id; ?>" <?php echo ($item->term_id == $_periodo ? 'selected' : ''); ?>><?php echo $item->name; ?></option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group col-lg-3 col-md-4">
+                        <label class="label-title"><?php echo __('Mes','ktech'); ?></label>
+                        <select name="mes" id="filtro-mes" class="form-control">
+                            <option value=""><?php echo __('Todos','ktech'); ?></option>
+                            <?php foreach ($meses as $key => $value): ?>
+                                <option value="<?php echo $key; ?>" <?php echo ($key == $_mes ? 'selected' : ''); ?>><?php echo $value; ?></option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group col-lg-3 col-md-4">
+                        <label class="label-title"><?php echo __('Programa bajo vigilancia','ktech'); ?></label>
+                        <select name="programa" id="filtro-programa" class="form-control">
+                            <?php foreach ($programas as $item): ?>
+                                <option value="<?php echo $item->term_id; ?>" <?php echo ($item->term_id == $_programa ? 'selected' : ''); ?>><?php echo $item->name; ?></option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group col-lg-3 col-md-4">
+                        <label class="label-title"><?php echo __('Tipo de formulario','ktech'); ?></label>
+                        <select name="formulario" id="filtro-formulario" class="form-control">
+                            <?php foreach ($formularios as $item): ?>
+                                <option value="<?php echo $item->term_id; ?>" <?php echo ($item->term_id == $_formulario ? 'selected' : ''); ?>><?php echo $item->name; ?></option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group col-lg-3 col-md-4">
+                        <label class="label-title"><?php echo __('Trampa','ktech'); ?></label>
+                        <select name="trampa" id="filtro-trampa" class="form-control">
+                            <option value=""><?php echo __('Todos','ktech'); ?></option>
+                            <?php foreach ($trampas as $item): ?>
+                                <option value="<?php echo $item->term_id; ?>" <?php echo ($item->term_id == $_trampa ? 'selected' : ''); ?>><?php echo $item->name; ?></option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group col-lg-3 col-md-4">
+                        <label class="label-title"><?php echo __('Técnico','ktech'); ?></label>
+                        <select name="tecnico" id="filtro-tecnico" class="form-control">
+                            <option value=""><?php echo __('Todos','ktech'); ?></option>
+                            <?php foreach ($tecnicos as $item): ?>
+                                <option value="<?php echo $item->term_id; ?>" <?php echo ($item->term_id == $_tecnico ? 'selected' : ''); ?>><?php echo $item->name; ?></option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group col-lg-3 col-md-4">
+                        <label class="label-title"><?php echo __('Condicion de Plaga','ktech'); ?></label>
+                        <select name="condicion" id="filtro-condicion" class="form-control">
+                            <option value=""><?php echo __('Todos','ktech'); ?></option>
+                            <?php foreach ($conditions as $value): ?>
+                                <option value="<?php echo $value; ?>" <?php echo ($item->term_id == $_condicion ? 'selected' : ''); ?>><?php echo $value; ?></option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group col-lg-3 col-md-4">
+                        <label class="label-title">&nbsp;</label>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="icon icon-btn-go-white"></i>
+                            <span><?php echo __('Generar Mapa','ktech'); ?></span>
+                        </button>
+                    </div>
                 </div>
             </div>
-        </div>
+        </form>
     </div>
 <?php } );
 
@@ -894,6 +946,182 @@ add_shortcode('form-monitoreo', function () {
  * Script formulario plan
  */
 add_action( 'wp_footer', function () {
+    ?>
+    
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC6pj4hRqrQSi6n9Ur7ejY6gBm7Lwmo-lU"></script>
+    <script>
+        function cierraSidebarMapa() {
+            if ($("#mapa .mapa-sidebar").hasClass("open")) {
+                $("#mapa .mapa-sidebar").animate({
+                    left: '-350px'
+                }, 500);
+                $("#mapa .mapa-sidebar").removeClass('open');
+            } else {
+                $("#mapa .mapa-sidebar").animate({
+                    left: '0px'
+                }, 500);
+                $("#mapa .mapa-sidebar").addClass('open');
+            }
+        }
+
+        function abrirSidebarMapa() {
+            if (!($("#mapa .mapa-sidebar").hasClass("open"))) {
+                $("#mapa .mapa-sidebar").animate({
+                    left: '0px'
+                }, 500);
+                $("#mapa .mapa-sidebar").addClass('open');
+            }
+        }
+
+        function llenarSidebarMapa(title) {
+            $('#mapModal').find('.modal-title').text(title);
+            $('#mapModal').modal('show');
+        }
+
+        (function ($) {
+
+            /**
+             *  new_map
+             *
+             *  This function will render a Google Map onto the selected jQuery element
+             *
+             *  @type	function
+             *  @date	8/11/2013
+             *  @since	4.3.0
+             *
+             *  @param	$el (jQuery element)
+             *  @return	n/a
+            */
+
+            function new_map($el) {
+                var $markers = $el.find('.marker');
+                var args = {
+                    zoom: 8,
+                    center: new google.maps.LatLng(18.8515178, -70.9307879),
+                    mapTypeId: google.maps.MapTypeId.SATELLITE, //google.maps.MapTypeId.ROADMAP,
+                    disableDefaultUI: false,
+                    scaleControl: true,
+                    zoomControl: true,
+                };
+
+                // create map
+                var map = new google.maps.Map($el[0], args);
+
+                var icons = {
+                    success: {
+                        icon: '<?php echo get_template_directory_uri(); ?>/assets/img/custom/pin-success.png'
+                    },
+                    danger: {
+                        icon: '<?php echo get_template_directory_uri(); ?>/assets/img/custom/pin-danger.png'
+                    }
+                };
+
+                // add a markers reference
+                map.markers = [];
+
+                $markers.each(function () {
+                    add_marker($(this), map, icons);
+                });
+                
+                return map;
+            }
+            var infowindow;
+
+            function add_marker($marker, map, icons) {
+                var latlng = new google.maps.LatLng($marker.attr('data-lat'), $marker.attr('data-lng'));
+                var title = $marker.find('.title').text();
+                var pin = $marker.attr('data-pin');
+                
+                var marker = new google.maps.Marker({
+                    position: latlng,
+                    icon: icons[pin].icon,
+                    map: map,
+                });
+
+                map.markers.push(marker);
+                var styles = [
+                    {
+                        "featureType": "administrative",
+                        "elementType": "labels.text.fill",
+                    }, {
+                        "featureType": "landscape",
+                        "elementType": "all",
+                    }, {
+                        "featureType": "poi",
+                        "elementType": "all",
+                    }, {
+                        "featureType": "poi",
+                        "elementType": "geometry.fill",
+                    }, {
+                        "featureType": "poi",
+                        "elementType": "geometry.stroke",
+                    }, {
+                        "featureType": "poi",
+                        "elementType": "labels",
+                    }, {
+                        "featureType": "road",
+                        "elementType": "all",
+                    }, {
+                        "featureType": "road.highway",
+                        "elementType": "all",
+                    }, {
+                        "featureType": "road.arterial",
+                        "elementType": "labels.icon",
+                    }, {
+                        "featureType": "transit",
+                        "elementType": "all",
+                    }, {
+                        "featureType": "transit.station.bus",
+                        "elementType": "all",
+                    }, {
+                        "featureType": "transit.station.bus",
+                        "elementType": "labels.text.fill",
+                    }, {
+                        "featureType": "transit.station.bus",
+                        "elementType": "labels.icon",
+                    }, {
+                        "featureType": "transit.station.rail",
+                        "elementType": "all",
+                    }, {
+                        "featureType": "transit.station.rail",
+                        "elementType": "labels.text.fill",
+                    }, {
+                        "featureType": "transit.station.rail",
+                        "elementType": "labels.icon",
+                    }, {
+                        "featureType": "water",
+                        "elementType": "all",
+                    }
+                ];
+                var styledMap = new google.maps.StyledMapType(styles, {
+                    name: "Styled Map"
+                });
+                map.mapTypes.set('map_style', styledMap);
+                map.setMapTypeId('map_style');
+                
+                google.maps.event.addListener(marker, 'click', function () {
+                    llenarSidebarMapa(title);
+                    abrirSidebarMapa();
+                });
+            }
+            
+            var map = null;
+            $(document).ready(function () {
+                $('.acf-map').each(function () {
+                    map = new_map($(this));
+                });
+            });
+        })(jQuery);
+
+    </script>
+<?php } );
+
+
+
+/**
+ * Script formulario plan
+ */
+add_action( 'xxxwp_footer', function () {
     $provincias = getProvincias();
     ?>
 

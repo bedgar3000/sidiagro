@@ -985,10 +985,38 @@ if (!function_exists('getProvincias')) {
     }
 }
 
+function getMonths() {
+    $arr = [
+        '1' => 'Enero',
+        '2' => 'Febrero',
+        '3' => 'Marzo',
+        '4' => 'Abril',
+        '5' => 'Mayo',
+        '6' => 'Junio',
+        '7' => 'Julio',
+        '8' => 'Agosto',
+        '9' => 'Septiembre',
+        '10' => 'Octubre',
+        '11' => 'Noviembre',
+        '12' => 'Diciembre',
+    ];
+
+    return $arr;
+}
+
+function getConditions() {
+    $arr = [
+        'AUSENCIA',
+        'PRESENCIA'
+    ];
+
+    return $arr;
+}
+
 function monitoreo() {
     global $wpdb;
 
-    $monitoreo = $wpdb->get_results('SELECT * FROM kt_monitoreo LIMIT 0, 5', ARRAY_A);
+    $monitoreo = $wpdb->get_results('SELECT * FROM kt_monitoreo LIMIT 700, 100', ARRAY_A);
     foreach ($monitoreo as $item) {
         #periodo
         $arr_periodo = explode('/', $item['FECHA']);
@@ -1012,11 +1040,12 @@ function monitoreo() {
         }
         $programa_id = $programa['term_id'];
         #formulario
-        $formulario = wp_insert_term($item['formulario'], 'monitoreo-formulario');
-        if (is_wp_error($formulario)) {
-            $formulario = get_term_by('name', $item['formulario'], 'monitoreo-formulario', ARRAY_A);
-        }
-        $formulario_id = $formulario['term_id'];
+        // $formulario = wp_insert_term($item['FORMULARIO'], 'monitoreo-formulario');
+        // if (is_wp_error($formulario)) {
+        //     $formulario = get_term_by('name', $item['FORMULARIO'], 'monitoreo-formulario', ARRAY_A);
+        // }
+        // $formulario_id = $formulario['term_id'];
+        $formulario_id = 21;
         #trampa
         $trampa = wp_insert_term($item['CODIGO_TRAMPA'], 'monitoreo-trampa');
         if (is_wp_error($trampa)) {
@@ -1034,6 +1063,7 @@ function monitoreo() {
         ));
 
         #META
+        $condicion = ($item['PRESENCIA'] == 'SI' ? 'PRESENCIA' : 'AUSENCIA');
         update_field('periodo', $periodo_id, $post_id);
         update_field('mes', $month, $post_id);
         update_field('fecha', $item['FECHA'], $post_id);
@@ -1054,8 +1084,11 @@ function monitoreo() {
         update_field('metodo_utilizado', $item['METODO_UTILIZADO'], $post_id);
         update_field('presencia', $item['PRESENCIA'], $post_id);
         update_field('estado', $item['ESTADO'], $post_id);
-        update_field('condicion', $item['ESTADO'], $post_id);
+        update_field('condicion', $condicion, $post_id);
+        update_field('trampa', $trampa_id, $post_id);
+        update_field('formulario', $formulario_id, $post_id);
     }
 
+    var_dump(date('YmdHis'));
     wp_die();
 }
