@@ -9,6 +9,7 @@
  * @version 1.0.0
  */
 
+monitoreo();
 $shortcode = get_field('shortcode');
 ?>
 

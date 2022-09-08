@@ -829,47 +829,56 @@ add_shortcode('form-monitoreo', function () {
 
         <div class="wrapper">
             <div class="form-row">
-                <div class="form-group col-md-4">
+                <div class="form-group col-lg-3 col-md-4">
                     <label class="label-title"><?php echo __('Año','ktech'); ?></label>
                     <select name="filtro_anio" id="filtro-anio" class="form-control">
                         <option value=""><?php echo __('Seleccione','ktech'); ?></option>
                     </select>
                 </div>
                 
-                <div class="form-group col-md-4">
+                <div class="form-group col-lg-3 col-md-4">
                     <label class="label-title"><?php echo __('Mes','ktech'); ?></label>
                     <select name="filtro_mes" id="filtro-mes" class="form-control">
-                        <option value=""><?php echo __('Seleccione','ktech'); ?></option>
+                        <option value=""><?php echo __('Todos','ktech'); ?></option>
                     </select>
                 </div>
                 
-                <div class="form-group col-md-4">
+                <div class="form-group col-lg-3 col-md-4">
                     <label class="label-title"><?php echo __('Programa bajo vigilancia','ktech'); ?></label>
                     <select name="filtro_programa" id="filtro-programa" class="form-control">
                         <option value=""><?php echo __('Seleccione','ktech'); ?></option>
                     </select>
                 </div>
-            </div>
-            
-            <div class="form-row">
-                <div class="form-group col-md-4">
-                    <label class="label-title"><?php echo __('Provincia','ktech'); ?></label>
-                    <select name="filtro_provincia" id="filtro-provincia" class="form-control">
-                        <option value=""><?php echo __('Seleccione','ktech'); ?></option>
-                        <?php foreach ($provincias as $provincia): ?>
-                            <option value="<?php echo $provincia['id']; ?>"><?php echo $provincia['name']; ?></option>
-                        <?php endforeach; ?>
+                
+                <div class="form-group col-lg-3 col-md-4">
+                    <label class="label-title"><?php echo __('Tipo de formulario','ktech'); ?></label>
+                    <select name="filtro_formulario" id="filtro-formulario" class="form-control">
+                        <option value=""><?php echo __('Todos','ktech'); ?></option>
                     </select>
                 </div>
                 
-                <div class="form-group col-md-4">
-                    <label class="label-title"><?php echo __('Municipio','ktech'); ?></label>
-                    <select name="filtro_municipio" id="filtro-municipio" class="form-control">
-                        <option value=""><?php echo __('Seleccione','ktech'); ?></option>
+                <div class="form-group col-lg-3 col-md-4">
+                    <label class="label-title"><?php echo __('Trampa','ktech'); ?></label>
+                    <select name="filtro_trampa" id="filtro-trampa" class="form-control">
+                        <option value=""><?php echo __('Todos','ktech'); ?></option>
                     </select>
                 </div>
                 
-                <div class="form-group col-md-4">
+                <div class="form-group col-lg-3 col-md-4">
+                    <label class="label-title"><?php echo __('Técnico','ktech'); ?></label>
+                    <select name="filtro_tecnico" id="filtro-tecnico" class="form-control">
+                        <option value=""><?php echo __('Todos','ktech'); ?></option>
+                    </select>
+                </div>
+                
+                <div class="form-group col-lg-3 col-md-4">
+                    <label class="label-title"><?php echo __('Condicion de Plaga','ktech'); ?></label>
+                    <select name="filtro_condicion" id="filtro-condicion" class="form-control">
+                        <option value=""><?php echo __('Todos','ktech'); ?></option>
+                    </select>
+                </div>
+                
+                <div class="form-group col-lg-3 col-md-4">
                     <label class="label-title">&nbsp;</label>
                     <button type="submit" class="btn btn-primary">
                         <i class="icon icon-btn-go-white"></i>

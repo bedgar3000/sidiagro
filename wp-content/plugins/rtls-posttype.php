@@ -166,19 +166,6 @@ function crear__taxonomy_RTLS() {
         ]
     );
     register_taxonomy(
-		'monitoreo-trampa',				        //	The name of the taxonomy. Name should be in slug form (must not contain capital letters or spaces). 
-		['monitoreo'],                                //	post type name
-		[
-			'hierarchical' => true,  
-			'label' => 'Trampas',	        //	Display name
-			'query_var' => true,
-			'rewrite' => [
-				'slug' => 'monitoreo-trampa',      //	This controls the base slug that will display before each term
-				'with_front' => false 		    //	Don't display the category base before 
-            ]
-        ]
-    );
-    register_taxonomy(
 		'monitoreo-tecnico',				        //	The name of the taxonomy. Name should be in slug form (must not contain capital letters or spaces). 
 		['monitoreo'],                                //	post type name
 		[
@@ -213,6 +200,32 @@ function crear__taxonomy_RTLS() {
 			'query_var' => true,
 			'rewrite' => [
 				'slug' => 'monitoreo-formulario',      //	This controls the base slug that will display before each term
+				'with_front' => false 		    //	Don't display the category base before 
+            ]
+        ]
+    );
+    register_taxonomy(
+		'monitoreo-trampa',				        //	The name of the taxonomy. Name should be in slug form (must not contain capital letters or spaces). 
+		['monitoreo'],                                //	post type name
+		[
+			'hierarchical' => true,  
+			'label' => 'Trampas',	        //	Display name
+			'query_var' => true,
+			'rewrite' => [
+				'slug' => 'monitoreo-trampa',      //	This controls the base slug that will display before each term
+				'with_front' => false 		    //	Don't display the category base before 
+            ]
+        ]
+    );
+    register_taxonomy(
+		'monitoreo-incidencia',				        //	The name of the taxonomy. Name should be in slug form (must not contain capital letters or spaces). 
+		['monitoreo'],                                //	post type name
+		[
+			'hierarchical' => true,  
+			'label' => 'Incidencias',	        //	Display name
+			'query_var' => true,
+			'rewrite' => [
+				'slug' => 'monitoreo-incidencia',      //	This controls the base slug that will display before each term
 				'with_front' => false 		    //	Don't display the category base before 
             ]
         ]

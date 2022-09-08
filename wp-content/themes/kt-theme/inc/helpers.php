@@ -986,5 +986,76 @@ if (!function_exists('getProvincias')) {
 }
 
 function monitoreo() {
-    
+    global $wpdb;
+
+    $monitoreo = $wpdb->get_results('SELECT * FROM kt_monitoreo LIMIT 0, 5', ARRAY_A);
+    foreach ($monitoreo as $item) {
+        #periodo
+        $arr_periodo = explode('/', $item['FECHA']);
+        $year = $arr_periodo[2];
+        $month = $arr_periodo[0];
+        $periodo = wp_insert_term($year, 'monitoreo-periodo');
+        if (is_wp_error($periodo)) {
+            $periodo = get_term_by('name', $year, 'monitoreo-periodo', ARRAY_A);
+        }
+        $periodo_id = $periodo['term_id'];
+        #tecnico
+        $tecnico = wp_insert_term($item['USUARIO'], 'monitoreo-tecnico');
+        if (is_wp_error($tecnico)) {
+            $tecnico = get_term_by('name', $item['USUARIO'], 'monitoreo-tecnico', ARRAY_A);
+        }
+        $tecnico_id = $tecnico['term_id'];
+        #programa
+        $programa = wp_insert_term($item['PROGRAMA'], 'monitoreo-programa');
+        if (is_wp_error($programa)) {
+            $programa = get_term_by('name', $item['PROGRAMA'], 'monitoreo-programa', ARRAY_A);
+        }
+        $programa_id = $programa['term_id'];
+        #formulario
+        $formulario = wp_insert_term($item['formulario'], 'monitoreo-formulario');
+        if (is_wp_error($formulario)) {
+            $formulario = get_term_by('name', $item['formulario'], 'monitoreo-formulario', ARRAY_A);
+        }
+        $formulario_id = $formulario['term_id'];
+        #trampa
+        $trampa = wp_insert_term($item['CODIGO_TRAMPA'], 'monitoreo-trampa');
+        if (is_wp_error($trampa)) {
+            $trampa = get_term_by('name', $item['CODIGO_TRAMPA'], 'monitoreo-trampa', ARRAY_A);
+        }
+        $trampa_id = $trampa['term_id'];
+
+        #POST
+        $post_title = $item['CODIGO_SEGUIMIENTO'] . '-' . $item['PROGRAMA'] . ' ' . $item['CODIGO_TRAMPA'];
+        $post_id = wp_insert_post(array (
+            'post_type'    => 'monitoreo',
+            'post_title'   => $post_title,
+            'post_content' => '',
+            'post_status'  => 'publish',
+        ));
+
+        #META
+        update_field('periodo', $periodo_id, $post_id);
+        update_field('mes', $month, $post_id);
+        update_field('fecha', $item['FECHA'], $post_id);
+        update_field('codigo_seguimiento', $item['CODIGO_SEGUIMIENTO'], $post_id);
+        update_field('programa', $programa_id, $post_id);
+        update_field('captura', $item['CAPTURA'], $post_id);
+        update_field('cantidad', $item['CANTIDAD'], $post_id);
+        update_field('latitud', $item['LATITUD'], $post_id);
+        update_field('longitud', $item['LONGITUD'], $post_id);
+        update_field('altura', $item['CODIGO_SEGUIMIENTO'], $post_id);
+        update_field('usuario', $tecnico_id, $post_id);
+        update_field('observacion', $item['OBSERVACION'], $post_id);
+        update_field('codigo_muestra', $item['CODIGO_MUESTRA'], $post_id);
+        update_field('resultado_muestra', $item['RESULTADO_MUESTRA'], $post_id);
+        update_field('observacion_muestra', $item['OBSERVACION_MUESTRA'], $post_id);
+        update_field('tecnico_laboratorio', $item['TECNICO_LABORATORIO'], $post_id);
+        update_field('fecha_analisis', $item['FECHA_ANALISIS'], $post_id);
+        update_field('metodo_utilizado', $item['METODO_UTILIZADO'], $post_id);
+        update_field('presencia', $item['PRESENCIA'], $post_id);
+        update_field('estado', $item['ESTADO'], $post_id);
+        update_field('condicion', $item['ESTADO'], $post_id);
+    }
+
+    wp_die();
 }
