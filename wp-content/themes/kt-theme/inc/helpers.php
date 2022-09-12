@@ -1082,7 +1082,7 @@ function monitoreo() {
         update_field('tecnico_laboratorio', $item['TECNICO_LABORATORIO'], $post_id);
         update_field('fecha_analisis', $item['FECHA_ANALISIS'], $post_id);
         update_field('metodo_utilizado', $item['METODO_UTILIZADO'], $post_id);
-        update_field('presencia', $item['PRESENCIA'], $post_id);
+        update_field('presencia', ($item['PRESENCIA'] == 0 ? 'NO' : $item['PRESENCIA']), $post_id);
         update_field('estado', $item['ESTADO'], $post_id);
         update_field('condicion', $condicion, $post_id);
         update_field('trampa', $trampa_id, $post_id);
