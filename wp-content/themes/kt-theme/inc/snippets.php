@@ -1025,6 +1025,9 @@ add_action( 'wp_footer', function () {
                     success: {
                         icon: '<?php echo get_template_directory_uri(); ?>/assets/img/custom/pin-success.png'
                     },
+                    warning: {
+                        icon: '<?php echo get_template_directory_uri(); ?>/assets/img/custom/pin-warning.png'
+                    },
                     danger: {
                         icon: '<?php echo get_template_directory_uri(); ?>/assets/img/custom/pin-danger.png'
                     }

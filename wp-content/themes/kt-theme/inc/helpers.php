@@ -1016,7 +1016,7 @@ function getConditions() {
 function seguimiento_trampeo() {
     global $wpdb;
 
-    $monitoreo = $wpdb->get_results('SELECT * FROM kt_monitoreo LIMIT 500, 500', ARRAY_A);
+    $monitoreo = $wpdb->get_results('SELECT * FROM kt_monitoreo LIMIT 1500, 500', ARRAY_A);
     foreach ($monitoreo as $item) {
         #periodo
         $arr_periodo = explode('-', $item['FECHA']);
@@ -1086,6 +1086,122 @@ function seguimiento_trampeo() {
         update_field('estado', $item['ESTADO'], $post_id);
         update_field('condicion', $condicion, $post_id);
         update_field('trampa', $trampa_id, $post_id);
+        update_field('formulario', $formulario_id, $post_id);
+    }
+
+    var_dump(date('YmdHis'));
+    wp_die();
+}
+
+function formulario_exploracion() {
+    global $wpdb;
+
+    $monitoreo = $wpdb->get_results('SELECT * FROM kt_formulario LIMIT 0, 500', ARRAY_A);
+    foreach ($monitoreo as $item) {
+        #periodo
+        $arr_periodo = explode('-', $item['fecha']);
+        $year = $arr_periodo[0];
+        $month = $arr_periodo[1];
+        $periodo = wp_insert_term($year, 'monitoreo-periodo');
+        if (is_wp_error($periodo)) {
+            $periodo = get_term_by('name', $year, 'monitoreo-periodo', ARRAY_A);
+        }
+        $periodo_id = $periodo['term_id'];
+        #tecnico
+        $tecnico = wp_insert_term($item['usuario'], 'monitoreo-tecnico');
+        if (is_wp_error($tecnico)) {
+            $tecnico = get_term_by('name', $item['usuario'], 'monitoreo-tecnico', ARRAY_A);
+        }
+        $tecnico_id = $tecnico['term_id'];
+        #firma
+        $firma = wp_insert_term($item['usuario'], 'monitoreo-tecnico');
+        if (is_wp_error($firma)) {
+            $firma = get_term_by('name', $item['usuario'], 'monitoreo-tecnico', ARRAY_A);
+        }
+        $firma_id = $firma['term_id'];
+        #programa
+        // $programa = wp_insert_term($item['PROGRAMA'], 'monitoreo-programa');
+        // if (is_wp_error($programa)) {
+            $programa = get_term_by('ID', $item['formulario'], 'monitoreo-programa', ARRAY_A);
+        // }
+        $programa_id = $item['formulario'];
+        #formulario
+        // $formulario = wp_insert_term($item['FORMULARIO'], 'monitoreo-formulario');
+        // if (is_wp_error($formulario)) {
+        //     $formulario = get_term_by('name', $item['FORMULARIO'], 'monitoreo-formulario', ARRAY_A);
+        // }
+        // $formulario_id = $formulario['term_id'];
+        $formulario_id = 2;
+        #trampa
+        // $trampa = wp_insert_term($item['CODIGO_TRAMPA'], 'monitoreo-trampa');
+        // if (is_wp_error($trampa)) {
+        //     $trampa = get_term_by('name', $item['CODIGO_TRAMPA'], 'monitoreo-trampa', ARRAY_A);
+        // }
+        // $trampa_id = $trampa['term_id'];
+        #formulario
+        $incidencia = wp_insert_term($item['incidencia'], 'monitoreo-incidencia');
+        if (is_wp_error($incidencia)) {
+            $incidencia = get_term_by('name', $item['incidencia'], 'monitoreo-incidencia', ARRAY_A);
+        }
+        $incidencia_id = $incidencia['term_id'];
+
+        #POST
+        $post_title = $item['codigo_seguimiento'] . '-' . $programa['name'] . ' ' . $year;
+        $post_id = wp_insert_post(array (
+            'post_type'    => 'formulario',
+            'post_title'   => $post_title,
+            'post_content' => '',
+            'post_status'  => 'publish',
+        ));
+
+        #META
+        update_field('periodo', $periodo_id, $post_id);
+        update_field('mes', $month, $post_id);
+        update_field('fecha', $item['fecha'], $post_id);
+        update_field('codigo_seguimiento', $item['codigo_seguimiento'], $post_id);
+        update_field('incidencia', $incidencia_id, $post_id);
+        update_field('usuario', $tecnico_id, $post_id);
+        update_field('finca', $item['finca'], $post_id);
+        update_field('propietario', $item['propietario'], $post_id);
+        update_field('telefono', $item['telefono'], $post_id);
+        update_field('encargado', $item['encargado'], $post_id);
+        update_field('latitud', $item['latitud'], $post_id);
+        update_field('longitud', $item['longitud'], $post_id);
+        update_field('altura', $item['altura'], $post_id);
+        update_field('temperatura', $item['temperatura'], $post_id);
+        update_field('presion', $item['presion'], $post_id);
+        update_field('humedad', $item['humedad'], $post_id);
+        update_field('temperatura_min', $item['temperatura_min'], $post_id);
+        update_field('temperatura_max', $item['temperatura_max'], $post_id);
+        update_field('estacion', $item['estacion'], $post_id);
+        update_field('area', $item['area'], $post_id);
+        update_field('cultivo', $item['cultivo'], $post_id);
+        update_field('variedad', $item['variedad'], $post_id);
+        update_field('fenologia', $item['fenologia'], $post_id);
+        update_field('sintomas', $item['sintomas'], $post_id);
+        update_field('plagas', $item['plagas'], $post_id);
+        update_field('riego', $item['riego'], $post_id);
+        update_field('suelo', $item['suelo'], $post_id);
+        update_field('tratamiento', $item['tratamiento'], $post_id);
+        update_field('muestra', $item['muestra'], $post_id);
+        update_field('recomendacion', $item['recomendacion'], $post_id);
+        update_field('sospecha', $item['sospecha'], $post_id);
+        update_field('enviar', $item['enviar'], $post_id);
+        update_field('urgente', $item['urgente'], $post_id);
+        update_field('analisis', $item['analisis'], $post_id);
+        update_field('codigo_muestra', $item['codigo_muestra'], $post_id);
+        update_field('sede', $item['sede'], $post_id);
+        update_field('observacion', $item['observacion'], $post_id);
+        update_field('usuario_firma', $firma_id, $post_id);
+        update_field('diagnostico', $item['diagnostico'], $post_id);
+        update_field('laboratorio_sede', $item['laboratorio_sede'], $post_id);
+        update_field('laboratorio_resultado', $item['laboratorio_resultado'], $post_id);
+        update_field('laboratorio_observacion', $item['laboratorio_observacion'], $post_id);
+        update_field('fecha_diagnostico', $item['fecha_diagnostico'], $post_id);
+        update_field('laboratorio_codigo', $item['laboratorio_codigo'], $post_id);
+        update_field('tecnico_diagnostico', $item['tecnico_diagnostico'], $post_id);
+        update_field('condicion', $item['condicion'], $post_id);
+        update_field('programa', $programa_id, $post_id);
         update_field('formulario', $formulario_id, $post_id);
     }
 

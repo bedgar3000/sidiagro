@@ -108,9 +108,15 @@ $query = new WP_Query($args);
 $i = 0;
 $data = [];
 if ($query->have_posts()) {
+    $count_presencia = 0;
+    $count_ausencia = 0;
     while ($query->have_posts()) {
         $query->the_post();
         $condicion = get_field('condicion');
+        $presencia = get_field('presencia');
+        if ($presencia == 'SI') { $pin = 'danger'; $bg = 'danger'; ++$count_presencia; }
+        elseif ($presencia == 'NO') { $pin = 'success'; $bg = 'success'; ++$count_ausencia; }
+        else { $pin = 'success'; $bg = ''; }
         $data[] = [
             'periodo'             => get_field('periodo'),
             'mes'                 => get_field('mes'),
@@ -131,15 +137,40 @@ if ($query->have_posts()) {
             'tecnico_laboratorio' => get_field('tecnico_laboratorio'),
             'fecha_analisis'      => get_field('fecha_analisis'),
             'metodo_utilizado'    => get_field('metodo_utilizado'),
-            'presencia'           => get_field('presencia'),
+            'presencia'           => $presencia,
             'estado'              => get_field('estado'),
             'formulario'          => get_field('formulario'),
             'condicion'           => $condicion,
-            'pin'                 => ($condicion == 'PRESENCIA' ? 'danger' : 'success'),
+            'pin'                 => $pin,
+            'bg'                  => $bg,
         ];
     }
 }
 wp_reset_postdata();
+
+usort($data, fn($a, $b) => $a['codigo_seguimiento'] <=> $b['codigo_seguimiento']);
+
+// $myArray = [];
+// $myArray[] = [
+//     'hashtag' => 'a7e87329b5eab8578f4f1098a152d6f4',
+//     'title'   => 'Flower',
+//     'order'   => '3',
+// ];
+// $myArray[] = [
+//     'hashtag' => 'b24ce0cd392a5b0b8dedc66c25213594',
+//     'title'   => 'Free',
+//     'order'   => '1',
+// ];
+// $myArray[] = [
+//     'hashtag' => 'e7d31fc0602fb2ede144d18cdffd816b',
+//     'title'   => 'Ready',
+//     'order'   => '2',
+// ];
+
+// usort($myArray, fn($a, $b) => $a['order'] <=> $b['order']);
+
+// var_dump($myArray);
+// wp_die();
 ?>
 
 <?php get_header(); ?>
@@ -165,19 +196,23 @@ wp_reset_postdata();
                                 <table class="table table-bordered">
                                     <tr>
                                         <th class="text-center bg-success-light" style="width: 20%;"><?php echo __('Ausencia de Plaga','ktech'); ?></th>
-                                        <th class="text-center bg-success-light" style="width: 30%;"><?php echo __('Indicador','ktech'); ?></th>
-                                        <th class="text-center bg-danger-light text-white" style="width: 20%;"><?php echo __('Presencia de Plaga','ktech'); ?></th>
-                                        <th class="text-center bg-danger-light text-white" style="width: 30%;"><?php echo __('Indicador','ktech'); ?></th>
+                                        <th class="text-center bg-success-light" style="width: 20%;"><?php echo __('Indicador','ktech'); ?></th>
+                                        <th class="text-center bg-success-light" style="width: 10%;"><?php echo __('Conteo','ktech'); ?></th>
+                                        <th class="text-center bg-danger-light" style="width: 20%;"><?php echo __('Presencia de Plaga','ktech'); ?></th>
+                                        <th class="text-center bg-danger-light" style="width: 10%;"><?php echo __('Indicador','ktech'); ?></th>
+                                        <th class="text-center bg-danger-light" style="width: 10%;"><?php echo __('Conteo','ktech'); ?></th>
                                     </tr>
                                     <tr>
                                         <td class="text-center bg-success-light">Ausencia</td>
                                         <td class="text-center bg-success-light">
                                             <img src="<?php echo get_template_directory_uri(); ?>/assets/img/custom/pin-success.png" alt="" class="img-fluid">
                                         </td>
-                                        <td class="text-center bg-danger-light text-white">Presencia</td>
-                                        <td class="text-center bg-danger-light text-white">
+                                        <td class="text-center bg-success-light"><?php echo $count_ausencia; ?></td>
+                                        <td class="text-center bg-danger-light">Presencia</td>
+                                        <td class="text-center bg-danger-light">
                                             <img src="<?php echo get_template_directory_uri(); ?>/assets/img/custom/pin-danger.png" alt="" class="img-fluid">
                                         </td>
+                                        <td class="text-center bg-danger-light"><?php echo $count_presencia; ?></td>
                                     </tr>
                                 </table>
                             </div>
@@ -251,7 +286,7 @@ wp_reset_postdata();
                                 </thead>
                                 <tbody>
                                     <?php foreach ($data as $item): ?>
-                                        <tr>
+                                        <tr class="table-<?php echo $item['bg']; ?>">
                                             <td><?php echo ++$i; ?></td>
                                             <td><?php echo $item['codigo_seguimiento']; ?></td>
                                             <td><?php echo $item['programa']->name; ?></td>

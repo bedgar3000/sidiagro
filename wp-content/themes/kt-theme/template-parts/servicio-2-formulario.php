@@ -69,13 +69,6 @@ if (!empty($_formulario)) {
         'compare' =>  '='
     ];
 }
-if (!empty($_trampa)) {
-    $meta_query[] = [
-        'key'     =>  'trampa',
-        'value'   =>  $_trampa,
-        'compare' =>  '='
-    ];
-}
 if (!empty($_incidencia)) {
     $meta_query[] = [
         'key'     =>  'incidencia',
@@ -100,7 +93,7 @@ if (!empty($_condicion)) {
 
 $args = [
     'post_status'    => 'publish',
-    'post_type'      => 'monitoreo',
+    'post_type'      => 'formulario',
     'posts_per_page' => -1,
     'meta_query'     => $meta_query,
 ];
@@ -108,34 +101,67 @@ $query = new WP_Query($args);
 $i = 0;
 $data = [];
 if ($query->have_posts()) {
+    $bajo  = 0;
+    $medio = 0;
+    $alto  = 0;
     while ($query->have_posts()) {
         $query->the_post();
-        $condicion = get_field('condicion');
+        $incidencia = get_field('incidencia');
+        if ($incidencia->slug == 'opcion-uno') { $pin = 'success'; $bg = 'success'; ++$bajo; }
+        elseif ($incidencia->slug == 'opcion-dos') { $pin = 'warning'; $bg = 'warning'; ++$medio; }
+        elseif ($incidencia->slug == 'opcion-tres') { $pin = 'danger'; $bg = 'danger'; ++$alto; }
+        else { $pin = 'success'; $bg = ''; }
         $data[] = [
-            'periodo'             => get_field('periodo'),
-            'mes'                 => get_field('mes'),
-            'fecha'               => get_field('fecha'),
-            'codigo_seguimiento'  => get_field('codigo_seguimiento'),
-            'programa'            => get_field('programa'),
-            'trampa'              => get_field('trampa'),
-            'captura'             => get_field('captura'),
-            'cantidad'            => get_field('cantidad'),
-            'latitud'             => get_field('latitud'),
-            'longitud'            => get_field('longitud'),
-            'altura'              => get_field('altura'),
-            'usuario'             => get_field('usuario'),
-            'observacion'         => get_field('observacion'),
-            'codigo_muestra'      => get_field('codigo_muestra'),
-            'resultado_muestra'   => get_field('resultado_muestra'),
-            'observacion_muestra' => get_field('observacion_muestra'),
-            'tecnico_laboratorio' => get_field('tecnico_laboratorio'),
-            'fecha_analisis'      => get_field('fecha_analisis'),
-            'metodo_utilizado'    => get_field('metodo_utilizado'),
-            'presencia'           => get_field('presencia'),
-            'estado'              => get_field('estado'),
-            'formulario'          => get_field('formulario'),
-            'condicion'           => $condicion,
-            'pin'                 => ($condicion == 'PRESENCIA' ? 'danger' : 'success'),
+            'periodo'                 => get_field('periodo'),
+            'mes'                     => get_field('mes'),
+            'fecha'                   => get_field('fecha'),
+            'codigo_seguimiento'      => get_field('codigo_seguimiento'),
+            'incidencia'              => get_field('incidencia'),
+            'usuario'                 => get_field('usuario'),
+            'finca'                   => get_field('finca'),
+            'propietario'             => get_field('propietario'),
+            'telefono'                => get_field('telefono'),
+            'encargado'               => get_field('encargado'),
+            'latitud'                 => get_field('latitud'),
+            'longitud'                => get_field('longitud'),
+            'altura'                  => get_field('altura'),
+            'temperatura'             => get_field('temperatura'),
+            'presion'                 => get_field('presion'),
+            'humedad'                 => get_field('humedad'),
+            'temperatura_min'         => get_field('temperatura_min'),
+            'temperatura_max'         => get_field('temperatura_max'),
+            'estacion'                => get_field('estacion'),
+            'area'                    => get_field('area'),
+            'cultivo'                 => get_field('cultivo'),
+            'variedad'                => get_field('variedad'),
+            'fenologia'               => get_field('fenologia'),
+            'sintomas'                => get_field('sintomas'),
+            'plagas'                  => get_field('plagas'),
+            'riego'                   => get_field('riego'),
+            'suelo'                   => get_field('suelo'),
+            'tratamiento'             => get_field('tratamiento'),
+            'muestra'                 => get_field('muestra'),
+            'recomendacion'           => get_field('recomendacion'),
+            'sospecha'                => get_field('sospecha'),
+            'enviar'                  => get_field('enviar'),
+            'urgente'                 => get_field('urgente'),
+            'analisis'                => get_field('analisis'),
+            'codigo_muestra'          => get_field('codigo_muestra'),
+            'sede'                    => get_field('sede'),
+            'observacion'             => get_field('observacion'),
+            'usuario_firma'           => get_field('usuario_firma'),
+            'diagnostico'             => get_field('diagnostico'),
+            'laboratorio_sede'        => get_field('laboratorio_sede'),
+            'laboratorio_resultado'   => get_field('laboratorio_resultado'),
+            'laboratorio_observacion' => get_field('laboratorio_observacion'),
+            'fecha_diagnostico'       => get_field('fecha_diagnostico'),
+            'laboratorio_codigo'      => get_field('laboratorio_codigo'),
+            'tecnico_diagnostico'     => get_field('tecnico_diagnostico'),
+            'condicion'               => get_field('condicion'),
+            'programa'                => get_field('programa'),
+            'formulario'              => get_field('formulario'),
+            'pin'                     => $pin,
+            'bg'                      => $bg,
         ];
     }
 }
@@ -164,19 +190,41 @@ wp_reset_postdata();
                             <div class="table-responsive">
                                 <table class="table table-bordered">
                                     <tr>
-                                        <th class="text-center bg-success-light" style="width: 20%;"><?php echo __('Ausencia de Plaga','ktech'); ?></th>
-                                        <th class="text-center bg-success-light" style="width: 30%;"><?php echo __('Indicador','ktech'); ?></th>
-                                        <th class="text-center bg-danger-light text-white" style="width: 20%;"><?php echo __('Presencia de Plaga','ktech'); ?></th>
-                                        <th class="text-center bg-danger-light text-white" style="width: 30%;"><?php echo __('Indicador','ktech'); ?></th>
+                                        <th class="text-center bg-success-light" style="width: 18%;"><?php echo __('Incidencia/Infestación','ktech'); ?></th>
+                                        <th class="text-center bg-success-light" style="width: 8%;"><?php echo __('Indicador','ktech'); ?></th>
+                                        <th class="text-center bg-success-light" style="width: 7%;"><?php echo __('Conteo','ktech'); ?></th>
+                                        
+                                        <th class="text-center bg-warning-light" style="width: 18%;"><?php echo __('Incidencia/Infestación','ktech'); ?></th>
+                                        <th class="text-center bg-warning-light" style="width: 8%;"><?php echo __('Indicador','ktech'); ?></th>
+                                        <th class="text-center bg-warning-light" style="width: 7%;"><?php echo __('Conteo','ktech'); ?></th>
+                                        
+                                        <th class="text-center bg-danger-light" style="width: 18%;"><?php echo __('Incidencia/Infestación','ktech'); ?></th>
+                                        <th class="text-center bg-danger-light" style="width: 8%;"><?php echo __('Indicador','ktech'); ?></th>
+                                        <th class="text-center bg-danger-light" style="width: 7%;"><?php echo __('Conteo','ktech'); ?></th>
                                     </tr>
                                     <tr>
-                                        <td class="text-center bg-success-light">Ausencia</td>
+                                        <td class="text-center bg-success-light"><?php echo __('Bajo','ktech'); ?></td>
                                         <td class="text-center bg-success-light">
                                             <img src="<?php echo get_template_directory_uri(); ?>/assets/img/custom/pin-success.png" alt="" class="img-fluid">
                                         </td>
-                                        <td class="text-center bg-danger-light text-white">Presencia</td>
-                                        <td class="text-center bg-danger-light text-white">
+                                        <td class="text-center bg-success-light">
+                                            <b><?php echo $bajo; ?></b>
+                                        </td>
+                                        
+                                        <td class="text-center bg-warning-light"><?php echo __('Medio','ktech'); ?></td>
+                                        <td class="text-center bg-warning-light">
+                                            <img src="<?php echo get_template_directory_uri(); ?>/assets/img/custom/pin-warning.png" alt="" class="img-fluid">
+                                        </td>
+                                        <td class="text-center bg-warning-light">
+                                            <b><?php echo $medio; ?></b>
+                                        </td>
+                                        
+                                        <td class="text-center bg-danger-light"><?php echo __('Alto','ktech'); ?></td>
+                                        <td class="text-center bg-danger-light">
                                             <img src="<?php echo get_template_directory_uri(); ?>/assets/img/custom/pin-danger.png" alt="" class="img-fluid">
+                                        </td>
+                                        <td class="text-center bg-danger-light">
+                                            <b><?php echo $alto; ?></b>
                                         </td>
                                     </tr>
                                 </table>
@@ -227,51 +275,101 @@ wp_reset_postdata();
                             <table class="table table-striped">
                                 <thead>
                                     <tr class="table-primary text-white">
-                                        <th><?php echo __('NUMERO','ktech'); ?></th>
-                                        <th><?php echo __('CODIGO SEGUIMIENTO','ktech'); ?></th>
-                                        <th style="min-width: 125px;"><?php echo __('PROGRAMA','ktech'); ?></th>
-                                        <th><?php echo __('CODIGO TRAMPA','ktech'); ?></th>
-                                        <th><?php echo __('FECHA','ktech'); ?></th>
-                                        <th><?php echo __('CAPTURA','ktech'); ?></th>
-                                        <th><?php echo __('CANTIDAD','ktech'); ?></th>
-                                        <th><?php echo __('LATITUD','ktech'); ?></th>
-                                        <th><?php echo __('LONGITUD','ktech'); ?></th>
-                                        <th><?php echo __('ALTURA','ktech'); ?></th>
-                                        <th style="min-width: 175px;"><?php echo __('USUARIO','ktech'); ?></th>
-                                        <th style="min-width: 175px;"><?php echo __('OBSERVACION','ktech'); ?></th>
-                                        <th><?php echo __('CODIGO MUESTRA','ktech'); ?></th>
-                                        <th style="min-width: 175px;"><?php echo __('RESULTADO DE MUESTRA','ktech'); ?></th>
-                                        <th style="min-width: 175px;"><?php echo __('OBSERVACION DE LA MUESTRA','ktech'); ?></th>
-                                        <th style="min-width: 175px;"><?php echo __('TECNICO DE LABORATORIO','ktech'); ?></th>
-                                        <th><?php echo __('FECHA DE ANALISIS','ktech'); ?></th>
-                                        <th><?php echo __('METODO UTILIZADO','ktech'); ?></th>
-                                        <th><?php echo __('PRESENCIA','ktech'); ?></th>
-                                        <th><?php echo __('ESTADO','ktech'); ?></th>
+                                        <td>Numero</td>
+                                        <td>Codigo</td>
+                                        <td>Incidencia/Infestación</td>
+                                        <td>Fecha de inspección</td>
+                                        <td style="min-width: 250px;">Nombre de tecnico</td>
+                                        <td style="min-width: 250px;">Nombre de Finca/Lugar:</td>
+                                        <td style="min-width: 250px;">Nombre Propietario:</td>
+                                        <td>Teléfono:</td>
+                                        <td style="min-width: 150px;">Nombre del encargado:</td>
+                                        <td>Latitud</td>
+                                        <td>Longitud</td>
+                                        <td>Altura</td>
+                                        <td>Temperatura</td>
+                                        <td>Preción</td>
+                                        <td>Humedad</td>
+                                        <td>Temperatura minima</td>
+                                        <td>Temperatura Maxima</td>
+                                        <td>Estacion climatica</td>
+                                        <td>Área (mz)</td>
+                                        <td>Cultivo</td>
+                                        <td>Variedad</td>
+                                        <td>Fenología</td>
+                                        <td>Síntomas</td>
+                                        <td>Plagas observadas</td>
+                                        <td>Tipo de Riego</td>
+                                        <td>Tipo de Suelo</td>
+                                        <td>Tratamiento Efectuado</td>
+                                        <td>Tipo de Muestra</td>
+                                        <td>Recomendación</td>
+                                        <td>Sospecha?</td>
+                                        <td>Enviar Muestra?</td>
+                                        <td>Urgente?:</td>
+                                        <td>Tipo de Analisis:</td>
+                                        <td style="min-width: 150px;">Codigo de Muestra</td>
+                                        <td>Sede de Laboratorio:</td>
+                                        <td style="min-width: 300px;">Observaciones</td>
+                                        <td style="min-width: 200px;">Nombre Usuario que firma:</td>
+                                        <td style="min-width: 250px;">Ya cuentas con el diagnostico de Resultado de labotorio?</td>
+                                        <td style="min-width: 150px;">Sede de Laboratorio:</td>
+                                        <td style="min-width: 150px;">Resultado de Laboratorio:</td>
+                                        <td style="min-width: 150px;">Observacion de Laboratorio:</td>
+                                        <td style="min-width: 150px;">Fecha de Diagnostico:</td>
+                                        <td style="min-width: 250px;">Codigo de la muestra Laboratorio:</td>
+                                        <td style="min-width: 150px;">Tecnico que Diagnostico:</td>
+                                        <td style="min-width: 150px;">Condicion de Plaga (Status):</td>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <?php foreach ($data as $item): ?>
-                                        <tr>
+                                        <tr class="table-<?php echo $item['bg']; ?>">
                                             <td><?php echo ++$i; ?></td>
                                             <td><?php echo $item['codigo_seguimiento']; ?></td>
-                                            <td><?php echo $item['programa']->name; ?></td>
-                                            <td><?php echo $item['trampa']->name; ?></td>
+                                            <td><?php echo $item['incidencia']->name; ?></td>
                                             <td><?php echo $item['fecha']; ?></td>
-                                            <td><?php echo $item['captura']; ?></td>
-                                            <td><?php echo $item['cantidad']; ?></td>
+                                            <td><?php echo $item['usuario']->name; ?></td>
+                                            <td><?php echo $item['finca']; ?></td>
+                                            <td><?php echo $item['propietario']; ?></td>
+                                            <td><?php echo $item['telefono']; ?></td>
+                                            <td><?php echo $item['encargado']; ?></td>
                                             <td><?php echo $item['latitud']; ?></td>
                                             <td><?php echo $item['longitud']; ?></td>
                                             <td><?php echo $item['altura']; ?></td>
-                                            <td><?php echo $item['usuario']->name; ?></td>
-                                            <td><?php echo $item['observacion']; ?></td>
+                                            <td><?php echo $item['temperatura']; ?></td>
+                                            <td><?php echo $item['presion']; ?></td>
+                                            <td><?php echo $item['humedad']; ?></td>
+                                            <td><?php echo $item['temperatura_min']; ?></td>
+                                            <td><?php echo $item['temperatura_max']; ?></td>
+                                            <td><?php echo $item['estacion']; ?></td>
+                                            <td><?php echo $item['area']; ?></td>
+                                            <td><?php echo $item['cultivo']; ?></td>
+                                            <td><?php echo $item['variedad']; ?></td>
+                                            <td><?php echo $item['fenologia']; ?></td>
+                                            <td><?php echo $item['sintomas']; ?></td>
+                                            <td><?php echo $item['plagas']; ?></td>
+                                            <td><?php echo $item['riego']; ?></td>
+                                            <td><?php echo $item['suelo']; ?></td>
+                                            <td><?php echo $item['tratamiento']; ?></td>
+                                            <td><?php echo $item['muestra']; ?></td>
+                                            <td><?php echo $item['recomendacion']; ?></td>
+                                            <td><?php echo $item['sospecha']; ?></td>
+                                            <td><?php echo $item['enviar']; ?></td>
+                                            <td><?php echo $item['urgente']; ?></td>
+                                            <td><?php echo $item['analisis']; ?></td>
                                             <td><?php echo $item['codigo_muestra']; ?></td>
-                                            <td><?php echo $item['resultado_muestra']; ?></td>
-                                            <td><?php echo $item['observacion_muestra']; ?></td>
-                                            <td><?php echo $item['tecnico_laboratorio']; ?></td>
-                                            <td><?php echo $item['fecha_analisis']; ?></td>
-                                            <td><?php echo $item['metodo_utilizado']; ?></td>
-                                            <td><?php echo $item['presencia']; ?></td>
-                                            <td><?php echo $item['estado']; ?></td>
+                                            <td><?php echo $item['sede']; ?></td>
+                                            <td><?php echo $item['observacion']; ?></td>
+                                            <td><?php echo $item['usuario_firma']->name; ?></td>
+                                            <td><?php echo $item['diagnostico']; ?></td>
+                                            <td><?php echo $item['laboratorio_sede']; ?></td>
+                                            <td><?php echo $item['laboratorio_resultado']; ?></td>
+                                            <td><?php echo $item['laboratorio_observacion']; ?></td>
+                                            <td><?php echo $item['fecha_diagnostico']; ?></td>
+                                            <td><?php echo $item['laboratorio_codigo']; ?></td>
+                                            <td><?php echo $item['tecnico_diagnostico']; ?></td>
+                                            <td><?php echo $item['condicion']; ?></td>
                                         </tr>
                                     <?php endforeach; ?>
                                 </tbody>

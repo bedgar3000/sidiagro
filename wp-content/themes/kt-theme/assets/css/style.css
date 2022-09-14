@@ -254,12 +254,20 @@
   background-color: #EE171F !important;
 }
 
+.bg-warning {
+  background-color: #ffc107 !important;
+}
+
 .bg-success-light {
   background-color: #BFDFBF !important;
 }
 
 .bg-danger-light {
   background-color: #D58686 !important;
+}
+
+.bg-warning-light {
+  background-color: #fdde7f !important;
 }
 
 .table-primary tbody + tbody, .table-primary td, .table-primary th, .table-primary thead th {

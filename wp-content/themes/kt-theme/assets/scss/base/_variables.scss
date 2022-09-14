@@ -21,6 +21,9 @@ $color-orange-dark: #ac1f15;
 $color-success-light: #BFDFBF;
 $color-success: #0E763D;
 $color-success-dark: #054b24;
+$color-warning-light: #fdde7f;
+$color-warning: #ffc107;
+$color-warning-dark: #ce9c07;
 
 // font weights
 $font-weight-thin: 100;
@@ -62,11 +65,17 @@ $header-logo-height-mobile-scroll: 116px;
 .bg-danger {
     background-color: $color-danger !important;
 }
+.bg-warning {
+    background-color: $color-warning !important;
+}
 .bg-success-light {
     background-color: $color-success-light !important;
 }
 .bg-danger-light {
     background-color: $color-danger-light !important;
+}
+.bg-warning-light {
+    background-color: $color-warning-light !important;
 }
 .table-primary tbody+tbody, .table-primary td, .table-primary th, .table-primary thead th {
     border-color: $color-primary;
