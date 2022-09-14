@@ -830,11 +830,14 @@ add_shortcode('form-monitoreo', function () {
     $programas = get_terms('monitoreo-programa', [
         'hide_empty' => false,
     ]);
-    $formularios = get_terms('monitoreo-formulario', [
-        'hide_empty' => false,
-        'order' => 'DESC',
-    ]);
+    $formularios = [
+        1 => 'Seguimiento Trampeo',
+        2 => 'Formulario de Exploración',
+    ];
     $trampas = get_terms('monitoreo-trampa', [
+        'hide_empty' => false,
+    ]);
+    $incidencias = get_terms('monitoreo-incidencia', [
         'hide_empty' => false,
     ]);
     $tecnicos = get_terms('monitoreo-tecnico', [
@@ -845,13 +848,14 @@ add_shortcode('form-monitoreo', function () {
     
     $periodo_id = (empty($periodos[0]->term_id) ? '' : $periodos[0]->term_id);
     $programa_id = (empty($programas[0]->term_id) ? '' : $programas[0]->term_id);
-    $formulario_id = (empty($formularios[0]->term_id) ? '' : $formularios[0]->term_id);
+    $formulario_id = 1;
 
     $_periodo = (empty($_GET['periodo']) ? $periodo_id : $_GET['periodo']);
-    $_mes = (empty($_GET['mes']) ? date('n') : $_GET['mes']);
+    $_mes = (empty($_GET['mes']) ? '' : $_GET['mes']);
     $_programa = (empty($_GET['programa']) ? $programa_id : $_GET['programa']);
-    $_formulario = (empty($_GET['formulario']) ? $formulario_id : $_GET['formulario']);
+    $_formulario = (empty($_GET['tipo_formulario']) ? $formulario_id : $_GET['tipo_formulario']);
     $_trampa = (empty($_GET['trampa']) ? '' : $_GET['trampa']);
+    $_incidencia = (empty($_GET['incidencia']) ? '' : $_GET['incidencia']);
     $_tecnico = (empty($_GET['tecnico']) ? '' : $_GET['tecnico']);
     $_condicion = (empty($_GET['condicion']) ? '' : $_GET['condicion']);
     ?>
@@ -892,19 +896,29 @@ add_shortcode('form-monitoreo', function () {
                     
                     <div class="form-group col-lg-3 col-md-4">
                         <label class="label-title"><?php echo __('Tipo de formulario','ktech'); ?></label>
-                        <select name="formulario" id="filtro-formulario" class="form-control">
-                            <?php foreach ($formularios as $item): ?>
-                                <option value="<?php echo $item->term_id; ?>" <?php echo ($item->term_id == $_formulario ? 'selected' : ''); ?>><?php echo $item->name; ?></option>
+                        <select name="tipo_formulario" id="filtro-formulario" class="form-control">
+                            <?php foreach ($formularios as $key => $item): ?>
+                                <option value="<?php echo $key; ?>" <?php echo ($key == $_formulario ? 'selected' : ''); ?>><?php echo $item; ?></option>
                             <?php endforeach; ?>
                         </select>
                     </div>
                     
-                    <div class="form-group col-lg-3 col-md-4">
+                    <div class="form-group col-lg-3 col-md-4" id="input-trampa">
                         <label class="label-title"><?php echo __('Trampa','ktech'); ?></label>
                         <select name="trampa" id="filtro-trampa" class="form-control">
                             <option value=""><?php echo __('Todos','ktech'); ?></option>
                             <?php foreach ($trampas as $item): ?>
                                 <option value="<?php echo $item->term_id; ?>" <?php echo ($item->term_id == $_trampa ? 'selected' : ''); ?>><?php echo $item->name; ?></option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group col-lg-3 col-md-4" id="input-incidencia">
+                        <label class="label-title"><?php echo __('Incidencia/Infestación','ktech'); ?></label>
+                        <select name="incidencia" id="filtro-incidencia" class="form-control">
+                            <option value=""><?php echo __('Todos','ktech'); ?></option>
+                            <?php foreach ($incidencias as $item): ?>
+                                <option value="<?php echo $item->term_id; ?>" <?php echo ($item->term_id == $_incidencia ? 'selected' : ''); ?>><?php echo $item->name; ?></option>
                             <?php endforeach; ?>
                         </select>
                     </div>

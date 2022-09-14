@@ -63,13 +63,13 @@ function crear__post_type_RTLS(){
 			'menu_icon'      => 'dashicons-location-alt',
 		],
 		[
-			'post_type_name' => 'vigilancia',
-			'single_name'    => 'Ruta de Vigilancia',
-			'plural_name'    => 'Ruta de Vigilancia',
+			'post_type_name' => 'formulario',
+			'single_name'    => 'Formulario de Exploracion',
+			'plural_name'    => 'Formulario de Exploracion',
 			'post_type'      => 'post',
 			'taxonomies'     => [],
 			'supports_block' => ['title','editor','thumbnail','custom-fields'],
-			'slug_rewrite'   => 'vigilancia', 'URL slug', 'vigilancia',
+			'slug_rewrite'   => 'formulario', 'URL slug', 'formulario',
 			'menu_icon'      => 'dashicons-location-alt',
 		],
 	];
@@ -164,7 +164,7 @@ function crear__taxonomy_RTLS() {
 
     register_taxonomy(
 		'monitoreo-periodo',				        //	The name of the taxonomy. Name should be in slug form (must not contain capital letters or spaces). 
-		['monitoreo','vigilancia'],                                //	post type name
+		['monitoreo','formulario'],                                //	post type name
 		[
 			'hierarchical' => true,  
 			'label' => 'Periodos',	        //	Display name
@@ -177,7 +177,7 @@ function crear__taxonomy_RTLS() {
     );
     register_taxonomy(
 		'monitoreo-tecnico',				        //	The name of the taxonomy. Name should be in slug form (must not contain capital letters or spaces). 
-		['monitoreo','vigilancia'],                                //	post type name
+		['monitoreo','formulario'],                                //	post type name
 		[
 			'hierarchical' => true,  
 			'label' => 'Técnicos',	        //	Display name
@@ -190,7 +190,7 @@ function crear__taxonomy_RTLS() {
     );
     register_taxonomy(
 		'monitoreo-programa',				        //	The name of the taxonomy. Name should be in slug form (must not contain capital letters or spaces). 
-		['monitoreo','vigilancia'],                                //	post type name
+		['monitoreo','formulario'],                                //	post type name
 		[
 			'hierarchical' => true,  
 			'label' => 'Programas',	        //	Display name
@@ -216,7 +216,7 @@ function crear__taxonomy_RTLS() {
     );
     register_taxonomy(
 		'monitoreo-incidencia',				        //	The name of the taxonomy. Name should be in slug form (must not contain capital letters or spaces). 
-		['vigilancia'],                                //	post type name
+		['formulario'],                                //	post type name
 		[
 			'hierarchical' => true,  
 			'label' => 'Incidencias',	        //	Display name

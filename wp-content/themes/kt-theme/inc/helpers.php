@@ -987,15 +987,15 @@ if (!function_exists('getProvincias')) {
 
 function getMonths() {
     $arr = [
-        '1' => 'Enero',
-        '2' => 'Febrero',
-        '3' => 'Marzo',
-        '4' => 'Abril',
-        '5' => 'Mayo',
-        '6' => 'Junio',
-        '7' => 'Julio',
-        '8' => 'Agosto',
-        '9' => 'Septiembre',
+        '01' => 'Enero',
+        '02' => 'Febrero',
+        '03' => 'Marzo',
+        '04' => 'Abril',
+        '05' => 'Mayo',
+        '06' => 'Junio',
+        '07' => 'Julio',
+        '08' => 'Agosto',
+        '09' => 'Septiembre',
         '10' => 'Octubre',
         '11' => 'Noviembre',
         '12' => 'Diciembre',
@@ -1013,15 +1013,15 @@ function getConditions() {
     return $arr;
 }
 
-function monitoreo() {
+function seguimiento_trampeo() {
     global $wpdb;
 
-    $monitoreo = $wpdb->get_results('SELECT * FROM kt_monitoreo LIMIT 700, 100', ARRAY_A);
+    $monitoreo = $wpdb->get_results('SELECT * FROM kt_monitoreo LIMIT 500, 500', ARRAY_A);
     foreach ($monitoreo as $item) {
         #periodo
-        $arr_periodo = explode('/', $item['FECHA']);
-        $year = $arr_periodo[2];
-        $month = $arr_periodo[0];
+        $arr_periodo = explode('-', $item['FECHA']);
+        $year = $arr_periodo[0];
+        $month = $arr_periodo[1];
         $periodo = wp_insert_term($year, 'monitoreo-periodo');
         if (is_wp_error($periodo)) {
             $periodo = get_term_by('name', $year, 'monitoreo-periodo', ARRAY_A);
@@ -1090,5 +1090,28 @@ function monitoreo() {
     }
 
     var_dump(date('YmdHis'));
+    wp_die();
+}
+
+function fixFormulario() {
+    $args = [
+        'post_status'    => 'publish',
+        'post_type'      => 'monitoreo',
+        'posts_per_page' => -1,
+    ];
+    $query = new WP_Query($args);
+    $data = [];
+    if ($query->have_posts()) {
+        while ($query->have_posts()) {
+            $query->the_post();
+            $data[] = [
+                'formulario' => get_field('formulario'),
+            ];
+
+            update_field('formulario', 1);
+        }
+    }
+    wp_reset_postdata();
+    
     wp_die();
 }

@@ -8,7 +8,6 @@
  * @subpackage Ktech Theme
  * @version 1.0.0
  */
-
 global $wp;
 $current_url = home_url( add_query_arg( array(), $wp->request ) );
 
@@ -20,20 +19,21 @@ $periodos = get_terms('monitoreo-periodo', [
 $programas = get_terms('monitoreo-programa', [
     'hide_empty' => false,
 ]);
-$formularios = get_terms('monitoreo-formulario', [
-    'hide_empty' => false,
-    'order' => 'DESC',
-]);
+$formularios = [
+    1 => 'Seguimiento Trampeo',
+    2 => 'Formulario de Exploración',
+];
 
 $periodo_id = (empty($periodos[0]->term_id) ? '' : $periodos[0]->term_id);
 $programa_id = (empty($programas[0]->term_id) ? '' : $programas[0]->term_id);
-$formulario_id = (empty($formularios[0]->term_id) ? '' : $formularios[0]->term_id);
+$formulario_id = 1;
 
 $_periodo = (empty($_GET['periodo']) ? $periodo_id : $_GET['periodo']);
-$_mes = (empty($_GET['mes']) ? date('n') : $_GET['mes']);
+$_mes = (empty($_GET['mes']) ? '' : $_GET['mes']);
 $_programa = (empty($_GET['programa']) ? $programa_id : $_GET['programa']);
-$_formulario = (empty($_GET['formulario']) ? $formulario_id : $_GET['formulario']);
+$_formulario = (empty($_GET['tipo_formulario']) ? $formulario_id : $_GET['tipo_formulario']);
 $_trampa = (empty($_GET['trampa']) ? '' : $_GET['trampa']);
+$_incidencia = (empty($_GET['incidencia']) ? '' : $_GET['incidencia']);
 $_tecnico = (empty($_GET['tecnico']) ? '' : $_GET['tecnico']);
 $_condicion = (empty($_GET['condicion']) ? '' : $_GET['condicion']);
 ?>
@@ -76,6 +76,13 @@ if (!empty($_trampa)) {
         'compare' =>  '='
     ];
 }
+if (!empty($_incidencia)) {
+    $meta_query[] = [
+        'key'     =>  'incidencia',
+        'value'   =>  $_incidencia,
+        'compare' =>  '='
+    ];
+}
 if (!empty($_tecnico)) {
     $meta_query[] = [
         'key'     =>  'tecnico',
@@ -96,7 +103,6 @@ $args = [
     'post_type'      => 'monitoreo',
     'posts_per_page' => -1,
     'meta_query'     => $meta_query,
-    // 'paged'          => $paged,
 ];
 $query = new WP_Query($args);
 $i = 0;
@@ -217,7 +223,7 @@ wp_reset_postdata();
             <div class="container">
                 <div class="row">
                     <div class="col">
-                        <div class="table-responsive">
+                        <div class="table-responsive" style="max-height: 690px;">
                             <table class="table table-striped">
                                 <thead>
                                     <tr class="table-primary text-white">
