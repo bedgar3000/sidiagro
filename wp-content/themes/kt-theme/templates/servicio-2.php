@@ -8,7 +8,6 @@
  * @subpackage Ktech Theme
  * @version 1.0.0
  */
-seguimiento_trampeo();
 $formularios = [
     1 => 'Seguimiento Trampeo',
     2 => 'Formulario de Exploración',

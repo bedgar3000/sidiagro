@@ -1016,7 +1016,7 @@ function getConditions() {
 function seguimiento_trampeo() {
     global $wpdb;
 
-    $monitoreo = $wpdb->get_results('SELECT * FROM kt_monitoreo LIMIT 1500, 500', ARRAY_A);
+    $monitoreo = $wpdb->get_results('SELECT * FROM kt_monitoreo LIMIT 4000, 500', ARRAY_A);
     foreach ($monitoreo as $item) {
         #periodo
         $arr_periodo = explode('-', $item['FECHA']);
