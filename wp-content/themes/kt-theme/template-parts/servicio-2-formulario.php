@@ -39,7 +39,6 @@ $_condicion = (empty($_GET['condicion']) ? '' : $_GET['condicion']);
 ?>
 
 <?php
-// $paged = ( get_query_var( 'paged' ) ) ? get_query_var( 'paged' ) : 1;
 $meta_query = [];
 if (!empty($_periodo)) {
     $meta_query[] = [
@@ -69,13 +68,6 @@ if (!empty($_formulario)) {
         'compare' =>  '='
     ];
 }
-if (!empty($_incidencia)) {
-    $meta_query[] = [
-        'key'     =>  'incidencia',
-        'value'   =>  $_incidencia,
-        'compare' =>  '='
-    ];
-}
 if (!empty($_tecnico)) {
     $meta_query[] = [
         'key'     =>  'tecnico',
@@ -90,6 +82,13 @@ if (!empty($_condicion)) {
         'compare' =>  '='
     ];
 }
+if (!empty($_incidencia)) {
+    $meta_query[] = [
+        'key'     =>  'incidencia',
+        'value'   =>  $_incidencia,
+        'compare' =>  '='
+    ];
+}
 
 $args = [
     'post_status'    => 'publish',
@@ -100,10 +99,10 @@ $args = [
 $query = new WP_Query($args);
 $i = 0;
 $data = [];
+$bajo  = 0;
+$medio = 0;
+$alto  = 0;
 if ($query->have_posts()) {
-    $bajo  = 0;
-    $medio = 0;
-    $alto  = 0;
     while ($query->have_posts()) {
         $query->the_post();
         $incidencia = get_field('incidencia');
@@ -381,11 +380,11 @@ wp_reset_postdata();
                 <div class="row">
                     <div class="col">
                         <div class="btn-actions">
-                            <a target="_blank" href="<?php echo $current_url; ?>/pdf?periodo=<?php echo $_periodo; ?>&mes=<?php echo $_mes; ?>&programa=<?php echo $_programa; ?>&formulario=<?php echo $_formulario; ?>&trampa=<?php echo $_trampa; ?>&tecnico=<?php echo $_tecnico; ?>&condicion=<?php echo $_condicion; ?>" class="btn btn-danger btn-lg text-white">
+                            <a target="_blank" href="<?php echo $current_url; ?>/pdf?periodo=<?php echo $_periodo; ?>&mes=<?php echo $_mes; ?>&programa=<?php echo $_programa; ?>&tipo_formulario=<?php echo $_formulario; ?>&trampa=<?php echo $_trampa; ?>&incidencia=<?php echo $_incidencia; ?>&tecnico=<?php echo $_tecnico; ?>&condicion=<?php echo $_condicion; ?>" class="btn btn-danger btn-lg text-white">
                                 <i class="icon icon-pdf-white"></i>
                                 <span><?php echo __('DESCARGAR PDF','ktech'); ?></span>
                             </a>
-                            <a target="_blank" href="<?php echo $current_url; ?>/excel?periodo=<?php echo $_periodo; ?>&mes=<?php echo $_mes; ?>&programa=<?php echo $_programa; ?>&formulario=<?php echo $_formulario; ?>&trampa=<?php echo $_trampa; ?>&tecnico=<?php echo $_tecnico; ?>&condicion=<?php echo $_condicion; ?>" class="btn btn-success btn-lg text-white">
+                            <a target="_blank" href="<?php echo $current_url; ?>/excel?periodo=<?php echo $_periodo; ?>&mes=<?php echo $_mes; ?>&programa=<?php echo $_programa; ?>&tipo_formulario=<?php echo $_formulario; ?>&trampa=<?php echo $_trampa; ?>&incidencia=<?php echo $_incidencia; ?>&tecnico=<?php echo $_tecnico; ?>&condicion=<?php echo $_condicion; ?>" class="btn btn-success btn-lg text-white">
                                 <i class="icon icon-pdf-white"></i>
                                 <span><?php echo __('DESCARGAR EXCEL','ktech'); ?></span>
                             </a>

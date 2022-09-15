@@ -39,7 +39,6 @@ $_condicion = (empty($_GET['condicion']) ? '' : $_GET['condicion']);
 ?>
 
 <?php
-// $paged = ( get_query_var( 'paged' ) ) ? get_query_var( 'paged' ) : 1;
 $meta_query = [];
 if (!empty($_periodo)) {
     $meta_query[] = [
@@ -69,20 +68,6 @@ if (!empty($_formulario)) {
         'compare' =>  '='
     ];
 }
-if (!empty($_trampa)) {
-    $meta_query[] = [
-        'key'     =>  'trampa',
-        'value'   =>  $_trampa,
-        'compare' =>  '='
-    ];
-}
-if (!empty($_incidencia)) {
-    $meta_query[] = [
-        'key'     =>  'incidencia',
-        'value'   =>  $_incidencia,
-        'compare' =>  '='
-    ];
-}
 if (!empty($_tecnico)) {
     $meta_query[] = [
         'key'     =>  'tecnico',
@@ -97,6 +82,13 @@ if (!empty($_condicion)) {
         'compare' =>  '='
     ];
 }
+if (!empty($_trampa)) {
+    $meta_query[] = [
+        'key'     =>  'trampa',
+        'value'   =>  $_trampa,
+        'compare' =>  '='
+    ];
+}
 
 $args = [
     'post_status'    => 'publish',
@@ -107,9 +99,9 @@ $args = [
 $query = new WP_Query($args);
 $i = 0;
 $data = [];
+$count_ausencia = 0;
+$count_presencia = 0;
 if ($query->have_posts()) {
-    $count_presencia = 0;
-    $count_ausencia = 0;
     while ($query->have_posts()) {
         $query->the_post();
         $condicion = get_field('condicion');
@@ -118,6 +110,7 @@ if ($query->have_posts()) {
         elseif ($presencia == 'NO') { $pin = 'success'; $bg = 'success'; ++$count_ausencia; }
         else { $pin = 'success'; $bg = ''; }
         $data[] = [
+            'ID'                  => get_the_ID(),
             'periodo'             => get_field('periodo'),
             'mes'                 => get_field('mes'),
             'fecha'               => get_field('fecha'),
@@ -149,28 +142,6 @@ if ($query->have_posts()) {
 wp_reset_postdata();
 
 usort($data, fn($a, $b) => $a['codigo_seguimiento'] <=> $b['codigo_seguimiento']);
-
-// $myArray = [];
-// $myArray[] = [
-//     'hashtag' => 'a7e87329b5eab8578f4f1098a152d6f4',
-//     'title'   => 'Flower',
-//     'order'   => '3',
-// ];
-// $myArray[] = [
-//     'hashtag' => 'b24ce0cd392a5b0b8dedc66c25213594',
-//     'title'   => 'Free',
-//     'order'   => '1',
-// ];
-// $myArray[] = [
-//     'hashtag' => 'e7d31fc0602fb2ede144d18cdffd816b',
-//     'title'   => 'Ready',
-//     'order'   => '2',
-// ];
-
-// usort($myArray, fn($a, $b) => $a['order'] <=> $b['order']);
-
-// var_dump($myArray);
-// wp_die();
 ?>
 
 <?php get_header(); ?>
@@ -225,7 +196,12 @@ usort($data, fn($a, $b) => $a['codigo_seguimiento'] <=> $b['codigo_seguimiento']
                         <div class="mapa" id="mapa">
                             <div class="acf-map">
                                 <?php foreach ($data as $item): ?>
-                                    <div class="marker" data-lat="<?php echo $item['latitud']; ?>" data-lng="<?php echo $item['longitud']; ?>" data-pin="<?php echo $item['pin']; ?>">
+                                    <div class="marker" 
+                                        data-lat="<?php echo $item['latitud']; ?>" 
+                                        data-lng="<?php echo $item['longitud']; ?>" 
+                                        data-pin="<?php echo $item['pin']; ?>"
+                                        data-url="<?php echo $current_url; ?>/pdf-registro?codigo=<?php echo $item['ID']; ?>"
+                                    >
                                         <p class="title"><?php echo $item['codigo_seguimiento']; ?></p>
                                     </div>
                                 <?php endforeach; ?>
@@ -242,7 +218,11 @@ usort($data, fn($a, $b) => $a['codigo_seguimiento'] <=> $b['codigo_seguimiento']
                                             <span aria-hidden="true">&times;</span>
                                         </button>
                                     </div>
-                                    <div class="modal-body"></div>
+                                    <div class="modal-body text-center">
+                                        <a href="#" target="_blank" rel="noopener noreferrer" id="modal-pdf-registro">
+                                            <img src="<?php echo get_template_directory_uri(); ?>/assets/img/custom/pdf.png" alt="" class="img-fluid">
+                                        </a>
+                                    </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
                                     </div>
@@ -318,11 +298,11 @@ usort($data, fn($a, $b) => $a['codigo_seguimiento'] <=> $b['codigo_seguimiento']
                 <div class="row">
                     <div class="col">
                         <div class="btn-actions">
-                            <a target="_blank" href="<?php echo $current_url; ?>/pdf?periodo=<?php echo $_periodo; ?>&mes=<?php echo $_mes; ?>&programa=<?php echo $_programa; ?>&formulario=<?php echo $_formulario; ?>&trampa=<?php echo $_trampa; ?>&tecnico=<?php echo $_tecnico; ?>&condicion=<?php echo $_condicion; ?>" class="btn btn-danger btn-lg text-white">
+                            <a target="_blank" href="<?php echo $current_url; ?>/pdf?periodo=<?php echo $_periodo; ?>&mes=<?php echo $_mes; ?>&programa=<?php echo $_programa; ?>&tipo_formulario=<?php echo $_formulario; ?>&trampa=<?php echo $_trampa; ?>&incidencia=<?php echo $_incidencia; ?>&tecnico=<?php echo $_tecnico; ?>&condicion=<?php echo $_condicion; ?>" class="btn btn-danger btn-lg text-white">
                                 <i class="icon icon-pdf-white"></i>
                                 <span><?php echo __('DESCARGAR PDF','ktech'); ?></span>
                             </a>
-                            <a target="_blank" href="<?php echo $current_url; ?>/excel?periodo=<?php echo $_periodo; ?>&mes=<?php echo $_mes; ?>&programa=<?php echo $_programa; ?>&formulario=<?php echo $_formulario; ?>&trampa=<?php echo $_trampa; ?>&tecnico=<?php echo $_tecnico; ?>&condicion=<?php echo $_condicion; ?>" class="btn btn-success btn-lg text-white">
+                            <a target="_blank" href="<?php echo $current_url; ?>/excel?periodo=<?php echo $_periodo; ?>&mes=<?php echo $_mes; ?>&programa=<?php echo $_programa; ?>&tipo_formulario=<?php echo $_formulario; ?>&trampa=<?php echo $_trampa; ?>&incidencia=<?php echo $_incidencia; ?>&tecnico=<?php echo $_tecnico; ?>&condicion=<?php echo $_condicion; ?>" class="btn btn-success btn-lg text-white">
                                 <i class="icon icon-pdf-white"></i>
                                 <span><?php echo __('DESCARGAR EXCEL','ktech'); ?></span>
                             </a>

@@ -903,7 +903,7 @@ add_shortcode('form-monitoreo', function () {
                         </select>
                     </div>
                     
-                    <div class="form-group col-lg-3 col-md-4" id="input-trampa">
+                    <div class="form-group col-lg-3 col-md-4 <?php echo ($_formulario == 1 ? 'd-block' : 'd-none'); ?>" id="input-trampa">
                         <label class="label-title"><?php echo __('Trampa','ktech'); ?></label>
                         <select name="trampa" id="filtro-trampa" class="form-control">
                             <option value=""><?php echo __('Todos','ktech'); ?></option>
@@ -913,7 +913,7 @@ add_shortcode('form-monitoreo', function () {
                         </select>
                     </div>
                     
-                    <div class="form-group col-lg-3 col-md-4" id="input-incidencia">
+                    <div class="form-group col-lg-3 col-md-4 <?php echo ($_formulario != 1 ? 'd-block' : 'd-none'); ?>" id="input-incidencia">
                         <label class="label-title"><?php echo __('Incidencia/Infestación','ktech'); ?></label>
                         <select name="incidencia" id="filtro-incidencia" class="form-control">
                             <option value=""><?php echo __('Todos','ktech'); ?></option>
@@ -978,7 +978,7 @@ add_action( 'wp_footer', function () {
             }
         }
 
-        function abrirSidebarMapa() {
+        function abrirSidebarMapa(url) {
             if (!($("#mapa .mapa-sidebar").hasClass("open"))) {
                 $("#mapa .mapa-sidebar").animate({
                     left: '0px'
@@ -987,8 +987,9 @@ add_action( 'wp_footer', function () {
             }
         }
 
-        function llenarSidebarMapa(title) {
+        function llenarSidebarMapa(title, url) {
             $('#mapModal').find('.modal-title').text(title);
+            $('#mapModal').find('#modal-pdf-registro').attr('href', url);
             $('#mapModal').modal('show');
         }
 
@@ -1048,6 +1049,7 @@ add_action( 'wp_footer', function () {
                 var latlng = new google.maps.LatLng($marker.attr('data-lat'), $marker.attr('data-lng'));
                 var title = $marker.find('.title').text();
                 var pin = $marker.attr('data-pin');
+                var url = $marker.attr('data-url');
                 
                 var marker = new google.maps.Marker({
                     position: latlng,
@@ -1117,8 +1119,8 @@ add_action( 'wp_footer', function () {
                 map.setMapTypeId('map_style');
                 
                 google.maps.event.addListener(marker, 'click', function () {
-                    llenarSidebarMapa(title);
-                    abrirSidebarMapa();
+                    llenarSidebarMapa(title, url);
+                    // abrirSidebarMapa(url);
                 });
             }
             
@@ -1130,10 +1132,28 @@ add_action( 'wp_footer', function () {
             });
         })(jQuery);
 
+        (function ($) {
+            $(document).ready(function () {
+                $('#filtro-formulario').on('change', function(e) {
+                    var formulario = $(this).val();
+
+                    $('#input-trampa').removeClass('d-block');
+                    $('#input-incidencia').removeClass('d-block');
+                    $('#input-trampa').removeClass('d-none');
+                    $('#input-incidencia').removeClass('d-none');
+
+                    if (formulario == 1) {
+                        $('#input-trampa').addClass('d-block');
+                        $('#input-incidencia').addClass('d-none');
+                    } else {
+                        $('#input-trampa').addClass('d-none');
+                        $('#input-incidencia').addClass('d-block');
+                    }
+                });
+            });
+        })(jQuery);
     </script>
 <?php } );
-
-
 
 /**
  * Script formulario plan
