@@ -111,6 +111,7 @@ if ($query->have_posts()) {
         elseif ($incidencia->slug == 'opcion-tres') { $pin = 'danger'; $bg = 'danger'; ++$alto; }
         else { $pin = 'success'; $bg = ''; }
         $data[] = [
+            'ID'                      => get_the_ID(),
             'periodo'                 => get_field('periodo'),
             'mes'                     => get_field('mes'),
             'fecha'                   => get_field('fecha'),
@@ -237,7 +238,12 @@ wp_reset_postdata();
                         <div class="mapa" id="mapa">
                             <div class="acf-map">
                                 <?php foreach ($data as $item): ?>
-                                    <div class="marker" data-lat="<?php echo $item['latitud']; ?>" data-lng="<?php echo $item['longitud']; ?>" data-pin="<?php echo $item['pin']; ?>">
+                                    <div class="marker" 
+                                        data-lat="<?php echo $item['latitud']; ?>" 
+                                        data-lng="<?php echo $item['longitud']; ?>" 
+                                        data-pin="<?php echo $item['pin']; ?>"
+                                        data-url="<?php echo $current_url; ?>/pdf-registro?codigo=<?php echo $item['ID']; ?>"
+                                    >
                                         <p class="title"><?php echo $item['codigo_seguimiento']; ?></p>
                                     </div>
                                 <?php endforeach; ?>
@@ -254,7 +260,11 @@ wp_reset_postdata();
                                             <span aria-hidden="true">&times;</span>
                                         </button>
                                     </div>
-                                    <div class="modal-body"></div>
+                                    <div class="modal-body text-center">
+                                        <a href="#" target="_blank" rel="noopener noreferrer" id="modal-pdf-registro">
+                                            <img src="<?php echo get_template_directory_uri(); ?>/assets/img/custom/pdf.png" alt="" class="img-fluid">
+                                        </a>
+                                    </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
                                     </div>
