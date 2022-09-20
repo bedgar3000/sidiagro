@@ -60,12 +60,12 @@ $post_id = $post->ID;
                                             <?php echo the_field('extract'); ?>
                                         </div>
                                     </div>
-                                    <div class="card-action">
+                                    <!-- <div class="card-action">
                                         <div class="btn btn-link">
-                                            <span class="mr-1"><?php echo __('Conoce más','ktech'); ?></span>
+                                            <span class="mr-1"><?php //echo __('Conoce más','ktech'); ?></span>
                                             <i class="icon icon-btn-go-primary-sm"></i>
                                         </div>
-                                    </div>
+                                    </div> -->
                                 </a>
                             </div>
                         <?php endwhile; ?>
@@ -84,7 +84,7 @@ $post_id = $post->ID;
         ]);
         ?>
         <?php if ($query_cultivos->have_posts()): ?>
-            <section class="section-cultivos" data-aos="fade-up">
+            <section class="section-cultivos" id="cultivos" data-aos="fade-up">
                 <div class="cultivo-banner" style="background-image: url(<?php echo path_upload($cultivos['banner']); ?>);">
                     <div class="container">
                         <div class="row">
@@ -133,7 +133,7 @@ $post_id = $post->ID;
         $academia = get_field('academia');
         ?>
         <?php if ($academia): ?>
-            <section class="section-academia" data-aos="fade-up">
+            <section class="section-academia" id="academia" data-aos="fade-up">
                 <div class="academia-banner" style="background-image: url(<?php echo path_upload($academia['banner']); ?>);">
                     <div class="container">
                         <div class="row">
