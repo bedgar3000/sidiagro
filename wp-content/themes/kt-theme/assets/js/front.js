@@ -20,8 +20,8 @@
             var formData = new FormData(document.getElementById('form-fito'));
             formData.append('action', 'form_fito');
 
-            // let overlay = document.getElementsByClassName('loading-overlay')[0];
-            // overlay.classList.toggle('is-active');
+            let overlay = document.getElementsByClassName('loading-overlay')[0];
+            overlay.classList.toggle('is-active');
 
             $.ajax({
                 type: "POST",
@@ -31,9 +31,8 @@
                 processData: false,
                 contentType: false,
                 success: function (response) {
-                    // overlay.classList.toggle('is-active');
-                    console.log(response);
-
+                    overlay.classList.toggle('is-active');
+                    
                     if (response.status == 'ERROR') {
                         response.error_data.forEach(function (error) {
                             //create message error in input get getElementsByName
@@ -44,7 +43,11 @@
                             input.parentNode.appendChild(message);
                         });
                     } else {
-                        alert(response.status);
+                        document.getElementById('form-fito').html = `
+                            <div class="aler alert-success">
+                                Formulario enviado exitosamente
+                            </div>
+                        `;
                     }
                 }
             });
