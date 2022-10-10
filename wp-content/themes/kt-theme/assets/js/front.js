@@ -43,11 +43,12 @@
                             input.parentNode.appendChild(message);
                         });
                     } else {
-                        document.getElementById('form-fito').html = `
-                            <div class="aler alert-success">
+                        var html = `
+                            <div class="alert alert-success">
                                 Formulario enviado exitosamente
                             </div>
                         `;
+                        $('#form-fito').html(html);
                     }
                 }
             });

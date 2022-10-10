@@ -70,15 +70,69 @@ function form_fito_callback()
         ]));
         wp_die();
     }
+
+    $photos_url = [];
+    // for multiple file upload.
+    $upload_overrides = array('test_form' => false);
+    $files = $_FILES['fotos'];
+    foreach ($files['name'] as $key => $value) {
+        if ($files['name'][$key]) {
+            $file = array(
+                'name' => $files['name'][$key],
+                'type' => $files['type'][$key],
+                'tmp_name' => $files['tmp_name'][$key],
+                'error' => $files['error'][$key],
+                'size' => $files['size'][$key]
+            );
+
+            $photos_url[] = wp_handle_upload($file, $upload_overrides);
+        }
+    }
+    $photos_url_name = '';
+    foreach ($photos_url as $key => $value) {
+        $photos_url_name .= $value['url'] . ', ';
+    }
+
+    //Saved photos in folder wordpress generate zip
+    $zip = new ZipArchive();
+    WP_Filesystem();
+    $destination = wp_upload_dir();
+    $destination_path = $destination['basedir'];
+    $DelFilePath = date('YmdHis') . '.zip';
+    $zip_destination_path = $destination_path . "/" . $DelFilePath;
+
+    if ($zip->open($destination_path . "/" . $DelFilePath, ZIPARCHIVE::CREATE) != TRUE) {
+        die("Could not open archive");
+    }
+
+    $zip->addEmptyDir('fotos');
+
+    foreach ($photos_url as $key => $file) {
+        //get the path to the file
+        $path = $file['file'];
+        //get the path to the upload directory
+        $path_parts = pathinfo($path);
+        //get the filename
+        $filename = $path_parts['basename'];
+        //add it to the zip
+        $zip->addFile($path, 'fotos/' . $filename);
+    }
     
-    $data = json_encode($_POST);
+    //generate url zip
+    $url_zip = $destination['baseurl'] . "/" . $DelFilePath;
+
+    $zip->close();
+    
+    $data = $_POST;
+    $data['fotos'] = $photos_url_name;
+    $data['zip'] = $url_zip;
     
     $table_name = 'kt_formularios';
     $insert = $wpdb->insert(
         $table_name,
         [
             'form'       => 'servicio-de-vigilancia-fitozoosanitario',
-            'data'       => $data,
+            'data'       => json_encode($data),
             'created_at' => date('Y-m-d H:i:s'),
         ],
         [
@@ -89,8 +143,9 @@ function form_fito_callback()
     );
     $lastid = $wpdb->insert_id;
     
+    
     //Send email to admin
-    $to = get_option('setting_email');
+    $to = 'info@ktechproduccion.net';//get_option('setting_email');
     $subject = 'Notificación Sospecha de Alertas de plaga';
     
     $message = '<h2>Generador del Reporte</h2>';
@@ -98,19 +153,19 @@ function form_fito_callback()
     $message .= '<p><strong>Teléfono: </strong>' . $generador_telefono . '</p>';  
     $message .= '<p><strong>Correo Electrónico: </strong>' . $generador_email . '</p>';
 
-    $message = '<h2>Datos de Finca y Propietario</h2>';
+    $message .= '<h2>Datos de Finca y Propietario</h2>';
     $message .= '<p><strong>Nombre Productor/Encargado: </strong>' . $finca_encargado . '</p>';
     $message .= '<p><strong>Nombre Finca: </strong>' . $finca_nombre . '</p>';  
     $message .= '<p><strong>Teléfono: </strong>' . $finca_telefono . '</p>';
 
-    $message = '<h2>Dirección de la Finca</h2>';
+    $message .= '<h2>Dirección de la Finca</h2>';
     $message .= '<p><strong>Provincia: </strong>' . $finca_provincia . '</p>';
     $message .= '<p><strong>Minicipio: </strong>' . $finca_municipio . '</p>';  
     $message .= '<p><strong>Distrito: </strong>' . $finca_distrito . '</p>';
     $message .= '<p><strong>Sección: </strong>' . $finca_seccion . '</p>';
     $message .= '<p><strong>Dirección: </strong>' . $finca_direccion . '</p>';
 
-    $message = '<h2>Geolocalización áreas con posible infección</h2>';
+    $message .= '<h2>Geolocalización áreas con posible infección</h2>';
     $message .= '<p><strong>Latitud: </strong>' . $area_latitud[0] . ' / <strong>Longitud: </strong>' . $area_longitud[0] . ' / <strong>Sospecha de Plaga: </strong>' . $area_sospecha[0] . '</p>';
     $message .= '<p><strong>Latitud: </strong>' . $area_latitud[1] . ' / <strong>Longitud: </strong>' . $area_longitud[1] . ' / <strong>Sospecha de Plaga: </strong>' . $area_sospecha[1] . '</p>';
     $message .= '<p><strong>Latitud: </strong>' . $area_latitud[2] . ' / <strong>Longitud: </strong>' . $area_longitud[2] . ' / <strong>Sospecha de Plaga: </strong>' . $area_sospecha[2] . '</p>';
@@ -120,19 +175,22 @@ function form_fito_callback()
     $message .= '<p><strong>Tamaño de la finca: </strong>' . $area_tamano . '</p>';
     $message .= '<p><strong>Cultivo: </strong>' . $area_cultivo . '</p>';
 
-    $message = '<h2>Fenología</h2>';
+    $message .= '<h2>Fenología</h2>';
     $message .= '<p><strong>Sospecha de Plaga: </strong>' . $fenologia_sospecha . '</p>';
     $message .= '<p><strong>Observaciones: </strong>' . $fenologia_observaciones . '</p>';
     $message .= '<p><strong>Estado Fenológico: </strong>' . $fenologia_estado . '</p>';
 
-    $message = '<h2>Síntomas</h2>';
+    $message .= '<h2>Síntomas</h2>';
     $message .= '<p>' . $fenologia_sintoma . '</p>';
 
-    $message = '<h2>Plagas Observadas</h2>';
+    $message .= '<h2>Plagas Observadas</h2>';
     $message .= '<p>' . $fenologia_plaga . '</p>';
+
+    $message .= '<h2>Fotos</h2>';
+    $message .= '<p><a href="' . $url_zip . '">' . $url_zip . '</a></p>';
     
     $headers = array('Content-Type: text/html; charset=UTF-8');
-    wp_mail($to, $subject, $message, $headers);
+    $mail = wp_mail($to, $subject, $message, $headers);
 
     die(json_encode([
         'status' => 'OK',
