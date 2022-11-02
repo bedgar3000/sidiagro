@@ -16,7 +16,7 @@
 include(get_template_directory() . '/inc/helpers.php');
 include(get_template_directory() . '/inc/custom.php');
 include(get_template_directory() . '/inc/snippets.php');
-include(get_template_directory() . '/inc/lang.php');
+// include(get_template_directory() . '/inc/lang.php');
 
 //  Editor antiguo
 add_filter('use_block_editor_for_post_type', '__return_false', 100);
